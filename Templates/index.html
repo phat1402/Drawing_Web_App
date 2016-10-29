@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Online Drawing Tool</title>
+
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link href="../Media/css/style.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
@@ -18,13 +23,56 @@
 				<li><a href="#" accesskey="2" title="">Coloring Book</a></li>
 				<li><a href="#" accesskey="3" title="">My Gallery</a></li>
 				<li><a href="#" accesskey="4" title="">Newsfeed</a></li>
-				<li><a href="#" accesskey="4" title=""><img src="../Media/img/login.svg"/></a></li>
+				<li><a id="login-button"><img src="../Media/img/login.svg"/></a></li>
 			</ul>
 		</div>
-	</div>
+</div>
+  <div id="container2">
+  <h3>Log In</h3>
+  <span class="close-btn">
+    <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+  </span>
+
+  <form>
+
+    <input type="email" name="email" placeholder="E-mail">
+    <input type="password" name="pass" placeholder="Password">
+
+
+    <a2 href="#"class="orange-btn">Log in</a2>
+    <div id="remember-container">
+      <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
+      <span id="remember">Remember me</span>
+      <span id="forgotten">Register</span>
+    </div>
+</form>
+</div>
+
+<!-- Register Container -->
+<div id="registerc">
+   <h3>Register</h3>
+  <span class="close-btn">
+    <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png"></img>
+  </span>
+
+  <form>
+  	<input type="username" name="username" placeholder="Username">
+    <input type="Fullname" name="fullname" placeholder="Full Name">
+    <input type="email" name="email" placeholder="E-mail">
+    <input type="password" name="Password" placeholder="Password">
+    <input type="password" name="Confirm Password" placeholder="Confirm Password">
+    <input type="address" name="address" placeholder="Address">
+    <a2 href="#" class="orange-btn">Register</a2>
+</form>
+</div>
+
+
 	<div id="drawingapp">
       <canvas></canvas>
    	</div>
 </div>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="../Media/js/index.js"></script>
 </body>
 </html>
