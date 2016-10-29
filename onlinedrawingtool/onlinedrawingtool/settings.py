@@ -15,7 +15,10 @@ from os.path import dirname, join, exists
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUR_DIR = dirname(dirname(dirname(__file__)))
+STATICFILES_DIRS = [join(CUR_DIR, 'static')]
 
+# MEDIA_ROOT = join(CUR_DIR, 'media')
+# MEDIA_URL = "/media/"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -23,7 +26,7 @@ CUR_DIR = dirname(dirname(dirname(__file__)))
 SECRET_KEY = '#ibu-6m+kony%mwwv@1p1h3ts1$*%b*ks2c*wda=_y^3g+rqln'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
@@ -56,7 +59,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            join(CUR_DIR, 'Templates')
+            join(CUR_DIR, 'Templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -65,6 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.static',
             ],
         },
     },
@@ -121,3 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
