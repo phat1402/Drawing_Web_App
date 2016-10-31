@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="registerc">
+            <h3>Register</h3>
+            <span class="close-btn">
+                <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png">
+            </span>
+
+            <div>
+                <input type="username" name="username" id = 'username' placeholder="Username">
+                <input type="Fullname" name="fullname" id = 'fullname' placeholder="Full Name">
+                <input type="email" name="email" id = 'emailregister' placeholder="E-mail">
+                <input type="password" name="Password" id = 'passregister' placeholder="Password">
+                <input type="password" name="Confirm Password" id = 'confirmedpass' placeholder="Confirm Password">
+                <input type="address" name="address" id = 'address' placeholder="Address">
+                <a2 href="#" class="orange-btn">Register</a2>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg " id="send_register" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Send</button>
+        </div>
+
+        <!--Get information by ajax for register-->
+        <script>
+            "use strict";
+            $('#send_register').on('click', function() {
+
+                    var username = document.getElementById('username').value;
+                    var fullname = document.getElementById('fullname').value;
+                    var emailregister = document.getElementById('emailregister').value;
+                    var passregister = document.getElementById('passregister').value;
+                    var confirmedpass = document.getElementById('confirmedpass').value;
+                    var address = document.getElementById('address').value;
+
+                    $.ajax({
+                        method: 'POST',
+                        url: '/api/send_register',
+                        data: {
+                            'username': username,
+                            'fullname': fullname,
+                            'emailregister': emailregister,
+                            'passregister': passregister,
+                            'confirmedpass': confirmedpass,
+                            'address': address
+                        },
+                        success: function (data) {
+
+
+                        }.bind(this)
+
+                    });
+                });
+
+        </script>
+</body>
+</html>
