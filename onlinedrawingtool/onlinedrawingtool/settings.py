@@ -22,6 +22,11 @@ STATICFILES_DIRS = [join(CUR_DIR, 'static')]
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
+
+# Ideally move env file should be outside the git repo
+# i.e. BASE_DIR.parent.parent
+
+
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '#ibu-6m+kony%mwwv@1p1h3ts1$*%b*ks2c*wda=_y^3g+rqln'
 
@@ -41,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'onlinedrawingtool',
+    'api',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +65,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            join(CUR_DIR, 'Templates'),
+            join(BASE_DIR, 'Templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -83,7 +89,7 @@ WSGI_APPLICATION = 'onlinedrawingtool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, '../../db.sqlite3'),
     }
 }
 
