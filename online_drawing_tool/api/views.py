@@ -2,8 +2,10 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from models import UserInfor
-
+from api.models import UserInfor,Photo
+from django.http import HttpResponse
+import json as simplejson
+from django.shortcuts import render_to_response
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -19,7 +21,7 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             userinfo = None
 
         if userinfo:
-            print userinfo.password
+            print (userinfo.password)
             if (userinfo.password == request.POST['pass']):
                 print("Success")
             else:
@@ -65,3 +67,37 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             print("The username or email is already existent")
         return self.render_json_response({
             'success': True})
+
+
+
+#def autocomplete_search(request):
+#    term = request.GET.get('term') #jquery-ui.autocomplete parameter
+#    photos = Photo.objects.filter(photo_id__istartswith=term) #lookup for a city
+#    res = []
+#    for c in photos:
+#         #make dict with the metadatas that jquery-ui.autocomple needs (the documentation is your friend)
+#         dict = {'photo_id':c.photo_id, 'gallery':c.gallery}
+#         res.append(dict)
+ #   return HttpResponse(simplejson.dumps(res))
+
+
+#def autocompleteModel(request):
+#    search_qs = Photo.objects.filter(photo_id__startswith=request.REQUEST['search'])
+#    results = []
+#    for r in search_qs:
+#        results.append(r.name)
+#    resp = request.REQUEST['callback'] + '(' + simplejson.dumps(results) + ');'
+#    return HttpResponse(resp, content_type='application/json')
+
+
+def search_titles(request):
+    if request.method == 'GET':
+        search_text = request.GET['search_text']
+    else:
+        search_text = ''
+    print(search_text)
+    if (search_text != ''):
+        results = Photo.objects.filter(photo_id__istartswith = search_text)
+    else:
+        results =''
+    return render_to_response('ajax_search.html', {'results':results})
