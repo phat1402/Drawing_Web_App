@@ -95,9 +95,8 @@ def search_titles(request):
         search_text = request.GET['search_text']
     else:
         search_text = ''
-    print(search_text)
     if (search_text != ''):
-        results = Photo.objects.filter(photo_id__istartswith = search_text)
+        results_Photo = Photo.objects.filter(photo_id__istartswith = search_text)
     else:
-        results =''
-    return render_to_response('ajax_search.html', {'results':results})
+        results_Photo =''
+    return render_to_response('ajax_search.html', {'results':results_Photo})

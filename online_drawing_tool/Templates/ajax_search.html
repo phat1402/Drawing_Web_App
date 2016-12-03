@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if results %}
+
+    {% for result in results %}
+        <li>{{ result.photo_id }}</li>
+    {% endfor %}
+
+{% elif results == '' %}
+        <li></li>
+    {% else %}
+    <li>No results found!</li>
+{% endif %}
+
+
+
+</body>
+</html>

@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1bd4daa3-ce29-41d0-9bab-be8c0f93be0b" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Online_drawing_tool.iml" afterPath="$PROJECT_DIR$/.idea/Online_drawing_tool.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/online_drawing_tool/Templates/ajax_search.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/online_drawing_tool/static/js/ajax_search.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/Templates/index.html" afterPath="$PROJECT_DIR$/online_drawing_tool/Templates/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/api/urls.py" afterPath="$PROJECT_DIR$/online_drawing_tool/api/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/api/views.py" afterPath="$PROJECT_DIR$/online_drawing_tool/api/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/settings.py" afterPath="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/views.py" afterPath="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/online_drawing_tool/static/js/index.js" afterPath="$PROJECT_DIR$/online_drawing_tool/static/js/index.js" />
     </list>
     <ignored path="Online_drawing_tool.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,8 +46,8 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/online_drawing_tool/api/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="19" />
+            <state relative-caret-position="220">
+              <caret line="101" column="70" selection-start-line="101" selection-start-column="70" selection-end-line="101" selection-end-column="70" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -90,11 +85,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ajax_search.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ajax_search.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/ajax_search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+            <state relative-caret-position="221">
+              <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Register.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/Register.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -103,8 +108,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
+            <state relative-caret-position="153">
+              <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
               <folding />
             </state>
           </provider>
@@ -122,11 +127,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ajax_search.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ajax_search.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/online_drawing_tool/static/js/ajax_search.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
+            <state relative-caret-position="102">
+              <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
               <folding>
                 <element signature="e#0#40#0" expanded="false" />
               </folding>
@@ -163,11 +168,11 @@
         <option value="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/views.py" />
         <option value="$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/urls.py" />
         <option value="$PROJECT_DIR$/online_drawing_tool/static/js/index.js" />
-        <option value="$PROJECT_DIR$/online_drawing_tool/Templates/index.html" />
         <option value="$PROJECT_DIR$/online_drawing_tool/api/urls.py" />
         <option value="$PROJECT_DIR$/online_drawing_tool/static/js/ajax_search.js" />
         <option value="$PROJECT_DIR$/online_drawing_tool/api/views.py" />
         <option value="$PROJECT_DIR$/online_drawing_tool/Templates/ajax_search.html" />
+        <option value="$PROJECT_DIR$/online_drawing_tool/Templates/index.html" />
       </list>
     </option>
   </component>
@@ -651,6 +656,14 @@
       <option name="presentableId" value="Default" />
       <updated>1479867179509</updated>
     </task>
+    <task id="LOCAL-00001" summary="Ajax Search Function">
+      <created>1480745640378</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1480745640379</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -690,6 +703,10 @@
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Ajax Search Function" />
+    <option name="LAST_COMMIT_MESSAGE" value="Ajax Search Function" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="3" />
@@ -697,13 +714,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/settings.py" />
     <entry file="file://$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/views.py" />
     <entry file="file://$PROJECT_DIR$/api/models.py" />
@@ -814,14 +824,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="40" column="41" selection-start-line="40" selection-start-column="41" selection-end-line="40" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/online_drawing_tool/onlinedrawingtool/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
@@ -846,31 +848,47 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/online_drawing_tool/static/js/ajax_search.js">
+    <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/Register.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/ajax_search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="11" selection-start-line="17" selection-start-column="11" selection-end-line="17" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
-          <caret line="30" column="39" selection-start-line="30" selection-start-column="39" selection-end-line="30" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#40#0" expanded="false" />
-          </folding>
+          <caret line="9" column="26" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/online_drawing_tool/api/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="101" column="19" selection-start-line="101" selection-start-column="19" selection-end-line="101" selection-end-column="19" />
+        <state relative-caret-position="220">
+          <caret line="101" column="70" selection-start-line="101" selection-start-column="70" selection-end-line="101" selection-end-column="70" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/online_drawing_tool/Templates/ajax_search.html">
+    <entry file="file://$PROJECT_DIR$/online_drawing_tool/static/js/ajax_search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-          <folding />
+        <state relative-caret-position="102">
+          <caret line="27" column="18" selection-start-line="27" selection-start-column="18" selection-end-line="27" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#40#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
