@@ -13,3 +13,9 @@ class HomePage(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(HomePage,self).get(request, *args, **kwargs)
+
+class MyGallery(generic.TemplateView):
+    template_name = 'mygallery.html'
+
+    def get(self, request, *args, **kwargs):
+        return super(MyGallery,self).get(request, *args, **kwargs)

@@ -15,7 +15,7 @@ from os.path import dirname, join, exists
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUR_DIR = dirname(dirname(dirname(__file__)))
-STATICFILES_DIRS = [join(CUR_DIR, 'static')]
+STATICFILES_DIRS = [join(BASE_DIR, 'static')]
 
 # MEDIA_ROOT = join(CUR_DIR, 'media')
 # MEDIA_URL = "/media/"

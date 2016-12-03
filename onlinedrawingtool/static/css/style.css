@@ -414,3 +414,55 @@ a2{
 .orange-btn{
   background: rgba(87,198,255,.5);
 }
+
+/* My Gallery */
+.ma-top-30{
+    margin-top: 30px;
+}
+.profile{
+    border-radius: 4px;
+}
+
+.profile-pic {
+    padding: 1.5em 2em;
+    text-align: center;
+}
+.profile-pic img {
+    border:4px solid #fff;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+	    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+}
+.profile-pic img:hover {
+	 border:4px solid  #F2762E;
+	 transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+}
+
+.row.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.searchbox{
+    margin-top:0px;
+    background-color: white !important;
+}
+.btn-default:hover{
+    background-color: rgb(242, 118, 46);
+    border-color: rgb(242, 118, 46);
+}
+.modal-dialog {width:400px;}
+.modal-dialog h3{
+    text-shadow: none;
+    text-align: left !important;
+    color:black ;
+    font-size: 24px;
+}
