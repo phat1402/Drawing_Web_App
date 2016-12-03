@@ -89,9 +89,9 @@ WSGI_APPLICATION = 'onlinedrawingtool.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'drawingtool',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'NAME': 'onlinedrawingtool',
+        'USER': 'Salehubb',
+        'PASSWORD': 'Zeuslordofolympus',
         'HOST': 'localhost',
         'PORT': '3306'
     }
