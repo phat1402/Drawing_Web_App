@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomePage.as_view(), name='HomePage'),
+    url(r'^mygallery', views.MyGallery.as_view(), name='MyGallery'),
     url(r'^api/', include(api.urls, namespace='api')),
 ]
 

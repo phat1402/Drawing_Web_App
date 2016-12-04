@@ -90,8 +90,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'onlinedrawingtool',
-        'USER': 'root',
-        'PASSWORD': 'krystalandmike1',
+        'USER': 'Salehubb',
+        'PASSWORD': 'Zeuslordofolympus',
         'HOST': 'localhost',
         'PORT': '3306'
     }
