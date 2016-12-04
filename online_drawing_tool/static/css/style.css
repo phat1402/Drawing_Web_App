@@ -419,6 +419,9 @@ a2{
 .ma-top-30{
     margin-top: 30px;
 }
+.ma-top-10{
+    margin-top: 10px;
+}
 .profile{
     border-radius: 4px;
 }
@@ -459,10 +462,30 @@ a2{
     background-color: rgb(242, 118, 46);
     border-color: rgb(242, 118, 46);
 }
-.modal-dialog {width:400px;}
+.modal-dialog {width:1000px;
+    height:500px;}
 .modal-dialog h3{
     text-shadow: none;
     text-align: left !important;
     color:black ;
     font-size: 24px;
+}
+.image_title{
+    color: black;
+    font-size: 30px;
+}
+
+.action_button{
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+
+.action_button img{
+    height: 30px;
+
+}
+
+.float-right{
+    float: right;
 }
