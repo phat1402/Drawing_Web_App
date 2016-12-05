@@ -62,7 +62,7 @@ a:hover
 /*********************************************************************************/
 /* Header                                                                        */
 /*********************************************************************************/
-	
+
 #header-wrapper
 {
 	background: #2b2b2b;
@@ -174,29 +174,14 @@ a:hover
 	border-radius: 30px;
 	color: #FFF;
 }
-#menu li a img 
+#menu li a img
 {
 	width: 30px;
 	height: 30px;
 }
 
 /* Canvas */
-#drawingapp
-{
-	align:center;
-}
 
-#drawingapp canvas
-{
-	border:1px solid red;
-	background-color: white;
-	height: 720px;
-	width: 1280px;
-	position: absolute;
-	right: 0;
-	left: 0;
-	margin: auto;
-}
 
 /* Son*/
 
@@ -221,7 +206,7 @@ img{
   border-radius: 50%;
   background: rgba(3,3,3,.8);
   overflow: hidden;
-  
+
   box-shadow: 10px 10px 30px #000;}
 
 /* Login container */
