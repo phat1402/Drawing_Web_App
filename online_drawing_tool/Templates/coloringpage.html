@@ -28,8 +28,8 @@
             </div>
             <div id="menu">
                 <ul>
-                    <li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-                    <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
+                    <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
+                    <li class="current_page_item"><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
                     <li><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
                     <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
                     <li><a id="login-button"><img src="{% static 'img/login.svg' %}"/></a></li>
@@ -40,7 +40,6 @@
 {#         <input type="text" name="search" id="txtSearch" placeholder="Try keyword 'test'" onkeyup="searchOpen()" />#}
             <input type="text" id="search" name="search" placeholder="search" />
             <ul id="search_results"></ul>
-            <h1>LOLOL</h1>
         </div>
 
         {% block login %}
@@ -52,8 +51,22 @@
         {% endblock %}
 
 
-        <div id="drawingapp">
-          <canvas></canvas>
+        <div class="container ma-bot-30">
+            <div class="row ma-top-30 row-eq-height">
+                <div class = "col-md-8 coloring_app">
+
+                    <canvas></canvas>
+
+                </div>
+                <div class = "col-md-4 selection_bar">
+                    <div class= "myBox">
+                        <a class="image_selection"><img src="{% static 'img/brush.svg' %}" alt=""/></a>
+                        <a class="image_selection"><img src="{% static 'img/brush.svg' %}"  alt=""/></a>
+                        <a class="image_selection"><img src="{% static 'img/brush.svg' %}"  alt=""/></a>
+                        <a class="image_selection"><img src="{% static 'img/brush.svg' %}" alt=""/></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
