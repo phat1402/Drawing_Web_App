@@ -174,7 +174,7 @@ a:hover
 	border-radius: 30px;
 	color: #FFF;
 }
-#menu li a img 
+#menu li a img
 {
 	width: 30px;
 	height: 30px;
@@ -275,7 +275,7 @@ h3{
   color: #ddd;
   text-shadow: 3px 3px 10px #000;
 }
-a2,input{
+#send_login, #send_register, input{
   font-family: 'Open Sans Condensed', sans-serif;
   text-decoration: none;
   position: relative;
@@ -405,7 +405,8 @@ position: absolute;
   display: none;
   z-index: 1;
 }
-a2{
+
+#send_login, #send_register {
   font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   padding: 4px 8px;

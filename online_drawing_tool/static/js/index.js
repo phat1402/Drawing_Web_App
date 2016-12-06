@@ -16,12 +16,14 @@ $(".close-btn").click(function() {
   TweenMax.to("#container", .4, {left: "0px", scale: 0, ease: Sine.easeInOut});
   $("#container, #registerc").fadeOut(800, function () {
     $("#login-button").fadeIn(800);
+    $('.message').empty();
   });
   
   TweenMax.from("#container2", .4, {scale: 1, ease: Sine.easeInOut});
   TweenMax.to("#container2", .4, {left: "0px", scale: 0, ease: Sine.easeInOut});
   $("#container2, #registerc").fadeOut(800, function () {
     $("#login-button").fadeIn(800);
+    $('.message').empty();
   });
   
 });
