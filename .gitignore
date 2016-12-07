@@ -1,4 +1,4 @@
 .idea
 /.sonar/
 .sonar/
-*.pyc
+/online_drawing_tool/onlinedrawingtool/settings.py
