@@ -1,34 +1,11 @@
-#drawingapp
-{
-	align:center;
-  left: 150px;
-  width: 1280px;
-  height: 720px;
-  position: relative;
-}
 
 #drawingCanvas
 {
-	border:1px solid red;
-	background-color: white;
-	height: 720px;
-	width: 1280px;
-	position: absolute;
-	right: 0;
-	left: 0;
-	margin: auto;
   z-index: 1000;
 }
 
 #tempCanvas
 {
-	border:1px solid red;
-	height: 720px;
-	width: 1280px;
-	position: absolute;
-	right: 0;
-	left: 0;
-	margin: auto;
   z-index: 1500;
 }
 
