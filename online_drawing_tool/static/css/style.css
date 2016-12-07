@@ -451,8 +451,13 @@ position: absolute;
     background-color: rgb(242, 118, 46);
     border-color: rgb(242, 118, 46);
 }
-.modal-dialog {width:1000px;
-    height:500px;}
+.modal-dialog {
+    width:720px !important;
+    height:500px !important; }
+
+.modal-content{
+    width: inherit !important;
+}
 .modal-dialog h3{
     text-shadow: none;
     text-align: left !important;
