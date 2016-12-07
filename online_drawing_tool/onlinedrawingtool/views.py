@@ -19,3 +19,9 @@ class MyGallery(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(MyGallery,self).get(request, *args, **kwargs)
+
+class ColoringPage(generic.TemplateView):
+    template_name = 'coloringpage.html'
+
+    def get(self, request, *args, **kwargs):
+        return super(ColoringPage,self).get(request, *args, **kwargs)

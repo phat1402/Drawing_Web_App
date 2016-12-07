@@ -6,6 +6,11 @@ from api.models import UserInfor,Photo
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
+from models import UserInfor
+from django.http import HttpResponse
+import json
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -13,6 +18,7 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         email = request.POST.get('email')
         password = request.POST.get('pass')
 
+        print request.is_ajax()
         print(email)
         print(password)
         try:
@@ -24,13 +30,17 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             print (userinfo.password)
             if (userinfo.password == request.POST['pass']):
                 print("Success")
+                request.session['username'] = userinfo.username
+                data = {'result':'sucess','username': request.session['username']}
             else:
                 print("Failed")
+                data = {'result': 'failed', 'messages' : 'Sorry! Either your username or password is incorrect'}
         else:
             print("Invalid username")
+            data = {'result': 'failed', 'messages': 'Sorry! Either your username or password is incorrect'}
+        print data['result']
 
-        return self.render_json_response({
-            'success': True})
+        return HttpResponse(json.dumps(data))
 
 class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
@@ -69,7 +79,6 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             'success': True})
 
 
-
 #def autocomplete_search(request):
 #    term = request.GET.get('term') #jquery-ui.autocomplete parameter
 #    photos = Photo.objects.filter(photo_id__istartswith=term) #lookup for a city
@@ -100,3 +109,11 @@ def search_titles(request):
     else:
         results_Photo =''
     return render_to_response('ajax_search.html', {'results':results_Photo})
+
+def log_out(request):
+    try:
+        del request.session['username']
+    except KeyError:
+        pass
+    return render(request,"index.html")
+
