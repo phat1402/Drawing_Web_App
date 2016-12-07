@@ -10,8 +10,8 @@
     <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
   	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href = "{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all"/>
     <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -26,7 +26,7 @@
         {% csrf_token %}
         <div id="header" class="container">
             <div id="logo">
-                <h1><span><img src="{% static 'img/brush.svg' %}"></span><a href="#">Online Drawing Tool</a></h1>
+                <h1><span><img src="{% static 'img/brush.svg' %}"></span><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
             </div>
             <div id="menu">
                 <ul>
@@ -55,20 +55,20 @@
                 </div>
                 <div class="col-md-8">
                     <div  class="row ">
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="{% static 'img/like.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
 
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
 
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 1" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 2" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                        <div class="col-lg-3 col-sm-4 col-xs-6"><a title="Image 3" href="#"><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
+                        <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
                     </div>
                 </div>
             </div>
@@ -112,6 +112,7 @@
   	    var title = $(this).parent('a').attr("title");
   	    $('.image_title').html(title);
   	    $($(this).parents('div').html()).appendTo('.photo_modal');
+
   	    $('#myModal').modal({show:true});
         });
         });

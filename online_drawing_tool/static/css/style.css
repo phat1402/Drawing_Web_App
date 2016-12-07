@@ -8,7 +8,7 @@ body
 {
 	margin: 0px;
 	padding: 0px;
-	background: #2b2b2b;
+	background-color: #2b2b2b !important;
 	font-family: 'Source Sans Pro', sans-serif;
 	font-size: 11pt;
 	font-weight: 300;
@@ -81,8 +81,8 @@ a:hover
 #logo
 {
 	position: absolute;
-	top: 1.6em;
 	width: 100%;
+    top: 1.6em;
 }
 
 #logo h1
@@ -102,10 +102,12 @@ a:hover
 	letter-spacing: 0.10em;
 	text-transform: uppercase;
 	font-size: 0.90em;
+
 }
 
 #logo span img
 {
+    vertical-align: baseline !important;
 	width: 50px;
 	height: 50px;
 }
@@ -181,30 +183,16 @@ a:hover
 }
 
 /* Canvas */
-#drawingapp
-{
-	align:center;
-}
-
-#drawingapp canvas
+.drawingapp canvas
 {
 	border:1px solid red;
 	background-color: white;
-	height: 720px;
-	width: 1280px;
+	height: 600px;
+	width: inherit;
 	position: absolute;
-	right: 0;
-	left: 0;
-	margin: auto;
-}
-
-/* Son*/
-
-img{
-  display: block;
-  margin: auto;
-  width: 100%;
-  height: auto;
+	/*right: 0;*/
+	/*left: 0;*/
+	/*margin: auto;*/
 }
 
 #login-button{
@@ -471,6 +459,11 @@ position: absolute;
     color:black ;
     font-size: 24px;
 }
+.photo_modal img{
+    max-width: 100% !important;
+    max-height: 100% !important;
+}
+
 .image_title{
     color: black;
     font-size: 30px;
@@ -541,4 +534,8 @@ background: rgb(242, 118, 46);
    margin-bottom: 20px;
     height: 150px;
     width: 150px;
+}
+.gallery_item a img{
+    width:165px !important;
+    height: 165px !important;
 }
