@@ -1,0 +1,16 @@
+{% load staticfiles %}
+<head>
+<link href="{% static 'css/heart_shaped_animation.css' %}" rel="stylesheet" type="text/css" media="all" />
+</head>
+<div class="heart-particle-box" data-post-id="{{ post }}">
+    <button class="likes post-likes" id="heart-icon">
+        {% if liked %}
+            <i class="heart-shaped fa fa-heart" style="display: inline-block"></i>
+            <i class="heart-shaped fa fa-heart-o" style="display: none"></i>
+        {% else %}
+            <i class="heart-shaped fa fa-heart" style="display: none"></i>
+            <i class="heart-shaped fa fa-heart-o" style="display: inline-block"></i>
+        {% endif %}
+    </button>
+    <div class="like_count_blog" id="heart-counter"></div>
+</div>

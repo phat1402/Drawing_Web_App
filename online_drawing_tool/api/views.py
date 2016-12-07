@@ -2,10 +2,15 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo
+from api.models import UserInfor, Photo, Photolike
 from django.http import HttpResponse
 import json as simplejson
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response,render,get_object_or_404
+from django import template
+
+register = template.Library()
+
+
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -31,6 +36,7 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
         return self.render_json_response({
             'success': True})
+
 
 class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
@@ -69,8 +75,7 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             'success': True})
 
 
-
-#def autocomplete_search(request):
+# def autocomplete_search(request):
 #    term = request.GET.get('term') #jquery-ui.autocomplete parameter
 #    photos = Photo.objects.filter(photo_id__istartswith=term) #lookup for a city
 #    res = []
@@ -80,8 +85,7 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 #         res.append(dict)
  #   return HttpResponse(simplejson.dumps(res))
 
-
-#def autocompleteModel(request):
+# def autocompleteModel(request):
 #    search_qs = Photo.objects.filter(photo_id__startswith=request.REQUEST['search'])
 #    results = []
 #    for r in search_qs:
@@ -96,7 +100,37 @@ def search_titles(request):
     else:
         search_text = ''
     if (search_text != ''):
-        results_Photo = Photo.objects.filter(photo_id__istartswith = search_text)
+        results_Photo = Photo.objects.filter(photo_id__istartswith=search_text)
     else:
-        results_Photo =''
-    return render_to_response('ajax_search.html', {'results':results_Photo})
+        results_Photo = ''
+    return render_to_response('ajax_search.html', {'results': results_Photo})
+
+
+def post_detail(request):
+    post_id = Photolike.objects.get(photo_id='martin123_1450630691528')
+    print(post_id.photo_id)
+    liked = False
+    if request.session.get('has_liked_', liked):
+        liked = True
+        print("liked {}_{}".format(liked, post_id))
+    context = {'post': post_id.photo_id, 'liked': liked}
+    return render(request, 'heart_shaped.html', context)
+
+
+def like_ajax(request, *args, **kwargs):
+    liked = False
+    post = Photolike.objects.filter(photo__photo_id__icontains='martin')
+    if request.session.get('has_liked_', liked):
+        print('unliked')
+        likes = post.count() - 1
+        try:
+            del request.session['has_liked_']
+        except KeyError:
+            print("keyerror")
+    else:
+        print("like")
+        liked = True
+        request.session['has_liked_'] = True
+        likes = post.count() + 1
+
+    return HttpResponse(likes, liked)

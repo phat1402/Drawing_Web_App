@@ -87,7 +87,13 @@
                     <div class="col-md-4">
                         <p class="image_title">
                         <div class="action_bar" style="height: 50px">
-                            <a class="action_button"><img src="{% static 'img/like.svg' %}"></a>
+                            <!--<a class="action_button"><img src="{% static 'img/like.svg' %}"></a>-->
+                            <!--Heart shaped button-->
+                            <a class="action_button">
+                            {% block heart_shaped %}
+                                {% include 'heart_shaped.html' %}
+                            {% endblock %}
+                            </a>
                             <a class="action_button"><img src="{% static 'img/share.svg' %}"></a>
                             <a class="action_button"><img src="{% static 'img/report.svg' %}"></a>
                         </div>
@@ -103,19 +109,18 @@
         </div>
     </div>
 
-
     <script src="{% static 'js/index.js' %}" type="text/javascript"></script>
     <script type="text/javascript">
         $(document).ready(function() {
-        $('.thumbnail').click(function(){
-        $('.photo_modal').empty();
-  	    var title = $(this).parent('a').attr("title");
-  	    $('.image_title').html(title);
-  	    $($(this).parents('div').html()).appendTo('.photo_modal');
-  	    $('#myModal').modal({show:true});
-        });
+            $('.thumbnail').click(function () {
+                $('.photo_modal').empty();
+                var title = $(this).parent('a').attr("title");
+                $('.image_title').html(title);
+                $($(this).parents('div').html()).appendTo('.photo_modal');
+                $('#myModal').modal({show: true});
+            });
         });
     </script>
-
+    <script src="/static/js/heart_shaped_animation.js"></script>
 </body>
 </html>
