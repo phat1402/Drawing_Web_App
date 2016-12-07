@@ -1,3 +1,5 @@
 .idea
+/.sonar/
+.sonar/
 /online_drawing_tool/onlinedrawingtool/settings.py
-
+online_drawing_tool/Templates/index.html
