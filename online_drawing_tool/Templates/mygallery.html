@@ -22,22 +22,25 @@
 
 </head>
 <body>
-    <div id="header-wrapper">
-        {% csrf_token %}
-        <div id="header" class="container">
-            <div id="logo">
-                <h1><span><img src="{% static 'img/brush.svg' %}"></span><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
-            </div>
-            <div id="menu">
-                <ul>
-                    <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
-                    <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
-                    <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
-                    <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
-                    <li><a id="login-button"><img src="{% static 'img/login.svg' %}"/></a></li>
-                </ul>
-            </div>
+<div id="header-wrapper">
+    {% csrf_token %}
+    <div id="header" class="container">
+        <div id="logo">
+            <span><img src="{% static 'img/brush.svg' %}"></span>
+            <h1><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
         </div>
+        <div id="menu">
+            <ul>
+                <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
+                <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
+                <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
+                <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
         <div class = "container">
             <div class="row ma-top-30 row-eq-height">
                 <div class="col-md-4 profile" style="background-color: white">
@@ -74,7 +77,6 @@
             </div>
         </div>
 
-    </div>
     <div tabindex="-1" class="modal fade" id="myModal" role="dialog" >
         <div class="modal-dialog">
          <div class="modal-content">
