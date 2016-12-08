@@ -8,20 +8,23 @@
 <div id="container2">
     <h3>Log In</h3>
     <span class="close-btn">
-                <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png">
+                <img src="https://cdn4.iconfinder.com/data/icons/miu/22/circle_close_delete_-128.png" width="20" height="20">
             </span>
 
     <div>
-        <input type="email" id='email' name="email" placeholder="E-mail">
-        <input type="password" name="pass" id='pass' placeholder="Password">
+        <input type="email" id='email' name="email" placeholder="E-mail" style="margin: 10px auto">
+        <input type="password" name="pass" id='pass' placeholder="Password"  style="margin: 10px auto">
         <div class="message"></div>
         <a id="send_login" href="#" class="orange-btn" type="submit" class="btn btn-primary btn-lg " id="send_data"
             data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> Processing">Log in
         </a>
-        <div id="remember-container">
-            <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
-            <span id="remember">Remember me</span>
-            <span id="forgotten">Register</span>
+        <div class="row row-eq-height">
+            <div class="col-md-8">
+                <input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/> <p> Remember me! </p>
+            </div>
+            <div class="col-md-4">
+                <span id="forgotten">Register</span>
+            </div>
         </div>
 
 
