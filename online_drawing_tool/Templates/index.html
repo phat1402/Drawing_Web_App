@@ -37,7 +37,7 @@
                 <li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
                 <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
                 <li><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
-                <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
+                <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
                 {% if request.session.username %}
                     <li> <a class="login-success" href="#"> {{ request.session.username }} <span class="arrow">&#9660;</span></a></li>
                     <li><a href="#" id="logout_link">Log Out</a></li>

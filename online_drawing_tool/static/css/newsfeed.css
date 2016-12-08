@@ -1,0 +1,39 @@
+#gallery {
+  height: 100%;
+}
+
+figure {
+    height: 250px;
+    width: 250px;
+    display: block;
+    overflow: hidden;
+    z-index: 100;
+}
+
+figcaption {
+    height: 250px;
+    width: 100%;
+    background: url(http://gridelicious.net/themes/treble/demo/assets/images/css/thumb_over.png) no-repeat center 150px black;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: -500px;
+    opacity: 0;
+    padding: 5px;
+}
+
+a {
+    color: #fff;
+}
+
+a:hover figcaption {
+    opacity: 0.8;
+    left: 0;
+    color: #fff;
+    transition: all 0.7s;
+}
+
+.padding-none{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
