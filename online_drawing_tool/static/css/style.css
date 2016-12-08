@@ -421,6 +421,11 @@ position: absolute;
     padding: 1.5em 2em;
     text-align: center;
 }
+.profile_info h3{
+    text-align: left !important;
+    text-shadow: none !important;
+
+}
 .profile-pic img {
     border:4px solid #fff;
     width: 200px;
@@ -450,8 +455,8 @@ position: absolute;
     background-color: white !important;
 }
 .btn-default:hover{
-    background-color: rgb(242, 118, 46);
-    border-color: rgb(242, 118, 46);
+    background-color: rgb(242, 118, 46);!important;
+    border-color: rgb(242, 118, 46);!important;
 }
 .modal-dialog {
     width:720px !important;

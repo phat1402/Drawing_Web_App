@@ -1,0 +1,11 @@
+.image_container{
+    background-color: white;
+}
+.image_size{
+    width: 100%;
+    height: 500px;
+}
+
+.left-none-padding{
+    padding-left: 0px !important;
+}

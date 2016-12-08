@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Online Drawing Tool</title>
+    <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+  	<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900" rel="stylesheet" />
+    <link href = "{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href = "{% static 'css/image_detail.css' %}" rel="stylesheet" type="text/css" media="all" />
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" media="all"/>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/gsap/1.16.1/TweenMax.min.js'></script>
+
+
+
+</head>
+<body>
+<div id="header-wrapper">
+    {% csrf_token %}
+    <div id="header" class="container">
+        <div id="logo">
+            <span><img src="{% static 'img/brush.svg' %}"></span>
+            <h1><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
+        </div>
+        <div id="menu">
+            <ul>
+                <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
+                <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
+                <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
+                <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+        <div class = "container image_container ma-top-30">
+            <div class = "row">
+                <div class = "col-md-8 left-none-padding">
+                   <img src = "{% static 'img/profile_pic.jpg' %}" class = "image_size">
+                </div>
+                <div class = "col-md-4">
+                    <h1> Image Title </h1>
+                    <div class="action_bar" style="height: 50px">
+                        <a class="action_button"><img src="{% static 'img/like.svg' %}"></a>
+                        <a class="action_button"><img src="{% static 'img/share.svg' %}"></a>
+                        <a class="action_button"><img src="{% static 'img/report.svg' %}"></a>
+                    </div>
+                    <textarea class="form-control" rows="5" placeholder="Comment"></textarea>
+                    <button class="btn btn-default ma-top-10 float-right" type="submit">Send</button>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>

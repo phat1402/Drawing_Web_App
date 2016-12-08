@@ -25,3 +25,9 @@ class ColoringPage(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(ColoringPage,self).get(request, *args, **kwargs)
+
+class ImageDetail(generic.TemplateView):
+    template_name = 'image_detail.html'
+
+    def get(self, request, *args, **kwargs):
+        return super(ImageDetail, self).get(request, *args, **kwargs)
