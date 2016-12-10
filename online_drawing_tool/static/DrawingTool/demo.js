@@ -55,6 +55,7 @@ var drawingApp = (function() {
         saveToServerFunction = function() {
             imgURL = canvaso.toDataURL("image/png");
             document.getElementById("data").value = imgURL;
+            alert(imgURL);
         },
         cutHex = function(h) {
             return (h.charAt(0) === "#") ? h.substring(1, 7) : h;

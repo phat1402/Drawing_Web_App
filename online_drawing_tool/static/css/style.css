@@ -67,6 +67,8 @@ a:hover
 #header-wrapper
 {
 	background: #2b2b2b;
+    position:relative;
+    z-index:50;
 }
 
 #header
@@ -89,7 +91,7 @@ a:hover
 #logo h1
 {
 	display: inline-block;
-	font-size: 2.5em;
+	font-size: 2em;
 	text-transform: uppercase;
 	font-weight: 700;
 	color: #ED7070;
@@ -181,6 +183,48 @@ a:hover
 {
 	width: 30px;
 	height: 30px;
+}
+
+	#login-dp{
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow:hidden;
+    background-color:#333;
+}
+#login-dp #forget_password {
+    margin:0px;
+    color: rgba(255,255,255,.8);
+    text-decoration: none;
+}
+#login-dp .help-block{
+    font-size:12px
+}
+#login-dp .bottom{
+    background-color:rgba(255,255,255,.8);
+    border-top:1px solid #ffffff;
+    background-color: #333;
+    color: #ffffff;
+    text-transform:uppercase;
+    clear:both;
+    padding:14px;
+}
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+#login-dp #register_form {
+    text-transform:none;
+    color: #fff;
+}
+#exampleInputEmail2 {
+    color:#fff;
+}
+#exampleInputPassword2 {
+    color:#fff;
+}
+
+.drawingapp {
+    position:relative;
+    z-index:30;
 }
 
 /* Canvas */
