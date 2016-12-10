@@ -116,4 +116,3 @@ def log_out(request):
     except KeyError:
         pass
     return render(request,"index.html")
-
