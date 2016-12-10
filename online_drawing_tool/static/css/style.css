@@ -58,6 +58,7 @@ a:hover
 {
 	margin: 0px auto;
 	width: 1200px;
+
 }
 /*********************************************************************************/
 /* Header                                                                        */
@@ -197,6 +198,7 @@ a:hover
 
 #login-button{
   cursor: pointer;
+  position: right;
   top: 0;
   left: 0;
   right: 0;
@@ -215,7 +217,7 @@ a:hover
 
 #container2{
   position: absolute;
-  top: 100px;
+  top: 0;
   left: 0;
   right: 0;
   bottom: 0;
@@ -223,14 +225,10 @@ a:hover
   width: 260px;
   height: 260px;
   border-radius: 5px;
-  background: #F2762E;
+  background: rgba(0,0,255,0.3);
+  box-shadow: 1px 1px 50px #000;
   display: none;
-  z-index: 9999;
-}
-#container2 h3{
-    font-family: inherit;
-    font-weight: inherit;
-    color: white;
+  z-index: 1;
 }
 
 .close-btn{
@@ -293,11 +291,11 @@ input:focus{
 
 /* Placeholders */
 ::-webkit-input-placeholder {
-   color: #ffffff;  }
+   color: #ddd;  }
 :-moz-placeholder { /* Firefox 18- */
-   color: #ffffff;  }
+   color: red;  }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: #ffffff;  }
+   color: red;  }
 :-ms-input-placeholder {
    color: #333;  }
 
@@ -349,8 +347,9 @@ input:focus{
 }
 
 #forgotten{
-  font-size: inherit;
-  font-family: inherit;
+  position: absolute;
+  font-size: 16px;
+  font-family: 'Hind', sans-serif;
   color: black;
   right: 0px;
   top: 8px;
@@ -397,10 +396,10 @@ position: absolute;
 }
 
 #send_login, #send_register {
-  font-family: inherit;
+  font-family: 'Open Sans Condensed', sans-serif;
   text-align: center;
   padding: 4px 8px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(107,255,3,0.3);
 }
 .orange-btn{
   background: rgba(87,198,255,.5);
@@ -420,11 +419,6 @@ position: absolute;
 .profile-pic {
     padding: 1.5em 2em;
     text-align: center;
-}
-.profile_info h3{
-    text-align: left !important;
-    text-shadow: none !important;
-
 }
 .profile-pic img {
     border:4px solid #fff;
@@ -449,14 +443,15 @@ position: absolute;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+
 }
 .searchbox{
     margin-top:0px;
     background-color: white !important;
 }
 .btn-default:hover{
-    background-color: rgb(242, 118, 46);!important;
-    border-color: rgb(242, 118, 46);!important;
+    background-color: rgb(242, 118, 46);
+    border-color: rgb(242, 118, 46);
 }
 .modal-dialog {
     width:720px !important;
@@ -527,17 +522,11 @@ background: rgb(242, 118, 46);
 
 /* Coloringbook */
 
-.coloring_app canvas
-{
-    border:1px solid red;
-    width:95%;
-    height: 600px;
-    background-color: white;
-    margin-right: 10px;
-}
+
 .selection_bar{
     height: 600px;
     overflow: scroll;
+	left: 150px;
 }
 .ma-bot-30{
     margin-bottom: 30px;
