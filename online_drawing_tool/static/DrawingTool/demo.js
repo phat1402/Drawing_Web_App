@@ -5,7 +5,7 @@ var drawingApp = (function() {
 
 
     "use strict";
-    var undo = [];
+
     var
         canvas,
         context,
@@ -34,7 +34,6 @@ var drawingApp = (function() {
         curColorB = 255,
         size_select,
         clear_button,
-        undo_button,
         save_button,
         imgURL,
         saveInt = 0,
@@ -112,22 +111,6 @@ var drawingApp = (function() {
         clearCanvas = function() {
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
-        },
-        undoAction = function() {
-            if (undo.length > 1) {
-                contexto.clearRect(0, 0, canvasWidth, canvasHeight);
-                context.clearRect(0, 0, canvasWidth, canvasHeight);
-                var tempImg = new Image();
-                undo.pop();
-
-                tempImg.src = undo[undo.length - 1];
-
-                // context.clearRect(0, 0, canvasWidth, canvasHeight);
-                // contexto.clearRect(0, 0, canvasWidth, canvasHeight);
-                console.log(tempImg);
-                contexto.drawImage(tempImg, 0, 0);
-            }
-
         },
         clearCanvasO = function() {
             contexto.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -327,6 +310,7 @@ var drawingApp = (function() {
                         if (curTool === "pen" || curTool === "eraser") {
                             context.beginPath();
                             context.moveTo(mouseX, mouseY);
+                            console.log("Pressing")
                         }
 
                         x0 = mouseX;
@@ -363,6 +347,7 @@ var drawingApp = (function() {
 
                         if (curTool === "pen" || curTool === "eraser") {
                             context.lineTo(mouseX, mouseY);
+                            console.log("dragging");
 
                         } else if (curTool === "rect") {
                             var x = Math.min(mouseX, x0),
@@ -437,24 +422,16 @@ var drawingApp = (function() {
                         drag(e);
                         paint = false;
                         if (curTool !== "bucket") {
-                            undo.push(canvas.toDataURL());
                             img_update();
                         }
-
-
-
-
                     }
                 },
                 cancel = function(e) {
                     drag(e);
                     paint = false;
                     if (curTool !== "bucket") {
-                        undo.push(canvas.toDataURL());
                         img_update();
                     }
-
-
                 };
 
 
@@ -462,7 +439,7 @@ var drawingApp = (function() {
             size_select.addEventListener('click', ev_size_change, false);
             clear_button.addEventListener('click', clearCanvasO, false);
             saveToServer.addEventListener('click', saveToServerFunction, false);
-            undo_button.addEventListener('click', undoAction, false);
+
 
 
 
@@ -525,7 +502,6 @@ var drawingApp = (function() {
             img_update();
 
             size_select = document.getElementById("sizeSelector");
-            undo_button = document.getElementById("undoButton");
             clear_button = document.getElementById("clearButton");
             saveToServer = document.getElementById("saveToServer");
 
@@ -536,10 +512,11 @@ var drawingApp = (function() {
             coloringPic.onload = resourceLoaded;
 
             coloringPic.src = inputURL;
-            undo[0] = inputURL;
 
             loadedIMG.onload = resourceLoaded;
             loadedIMG.src = wallURL;
+
+            console.log("loaded");
 
             saveImageToServer = document.getElementById("data");
             saveImageToServer.value = canvaso.toDataURL("image/png");
