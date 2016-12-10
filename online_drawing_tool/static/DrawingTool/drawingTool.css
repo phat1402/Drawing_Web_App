@@ -9,6 +9,11 @@
   z-index: 1500;
 }
 
+.left-150{
+    position: absolute;
+    left: 150px;
+}
+
 #colorTable {
  width:231px;
  height:132px;
