@@ -5,7 +5,7 @@ var drawingApp = (function() {
 
 
     "use strict";
-    var undo = [];
+
     var
         canvas,
         context,
@@ -16,7 +16,7 @@ var drawingApp = (function() {
         coloringPic = new Image(),
         loadedIMG = new Image(),
         locationFixX = -150,
-        locationFixY = -130,
+        locationFixY = -110,
         i,
         paint = false,
         curColor = "rgb(0, 0, 255)",
@@ -33,8 +33,8 @@ var drawingApp = (function() {
         curColorG = 0,
         curColorB = 255,
         size_select,
-        clear_button,
         undo_button,
+        clear_button,
         save_button,
         imgURL,
         saveInt = 0,
@@ -44,7 +44,8 @@ var drawingApp = (function() {
         colorLayerData,
         outlineLayerData,
         saveImageToServer,
-
+        undoData = [],
+        undoImg = new Image(),
         changeColoringImage = function(imgFile) {
             clearCanvasO();
             coloringPic.src = imgFile;
@@ -109,25 +110,17 @@ var drawingApp = (function() {
         ev_size_change = function(e) {
             curSize = this.value / 3;
         },
+        undoAction = function() {
+            undoData.pop();
+            undoImg.src = undoData[undoData.length - 1];
+            contexto.clearRect(0, 0, canvasWidth, canvasHeight);
+            contexto.drawImage(undoImg, 0, 0, canvasWidth, canvasHeight);
+            console.log(undoImg);
+
+        },
         clearCanvas = function() {
 
             context.clearRect(0, 0, canvasWidth, canvasHeight);
-        },
-        undoAction = function() {
-            if (undo.length > 1) {
-                contexto.clearRect(0, 0, canvasWidth, canvasHeight);
-                context.clearRect(0, 0, canvasWidth, canvasHeight);
-                var tempImg = new Image();
-                undo.pop();
-
-                tempImg.src = undo[undo.length - 1];
-
-                // context.clearRect(0, 0, canvasWidth, canvasHeight);
-                // contexto.clearRect(0, 0, canvasWidth, canvasHeight);
-                console.log(tempImg);
-                contexto.drawImage(tempImg, 0, 0);
-            }
-
         },
         clearCanvasO = function() {
             contexto.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -327,6 +320,7 @@ var drawingApp = (function() {
                         if (curTool === "pen" || curTool === "eraser") {
                             context.beginPath();
                             context.moveTo(mouseX, mouseY);
+                            console.log("Pressing")
                         }
 
                         x0 = mouseX;
@@ -363,6 +357,7 @@ var drawingApp = (function() {
 
                         if (curTool === "pen" || curTool === "eraser") {
                             context.lineTo(mouseX, mouseY);
+                            console.log("dragging");
 
                         } else if (curTool === "rect") {
                             var x = Math.min(mouseX, x0),
@@ -436,12 +431,11 @@ var drawingApp = (function() {
                         context.beginPath();
                         drag(e);
                         paint = false;
+
                         if (curTool !== "bucket") {
-                            undo.push(canvas.toDataURL());
                             img_update();
                         }
-
-
+                        undoData.push(canvaso.toDataURL("image/png"));
 
 
                     }
@@ -450,19 +444,17 @@ var drawingApp = (function() {
                     drag(e);
                     paint = false;
                     if (curTool !== "bucket") {
-                        undo.push(canvas.toDataURL());
                         img_update();
                     }
-
-
                 };
 
 
 
             size_select.addEventListener('click', ev_size_change, false);
+            undo_button.addEventListener('click', undoAction, false);
             clear_button.addEventListener('click', clearCanvasO, false);
             saveToServer.addEventListener('click', saveToServerFunction, false);
-            undo_button.addEventListener('click', undoAction, false);
+
 
 
 
@@ -536,10 +528,13 @@ var drawingApp = (function() {
             coloringPic.onload = resourceLoaded;
 
             coloringPic.src = inputURL;
-            undo[0] = inputURL;
 
             loadedIMG.onload = resourceLoaded;
             loadedIMG.src = wallURL;
+
+            undoData[0] = wallURL;
+
+            console.log("loaded");
 
             saveImageToServer = document.getElementById("data");
             saveImageToServer.value = canvaso.toDataURL("image/png");
@@ -571,7 +566,7 @@ var drawingApp = (function() {
 }());
 
 
-var colorPalette = [ //Begin array of color table hex color codes.
+var colorPalette = [ //Begin array of color table hex color codes. 21 x 12
 
     "#000000", "#000000", "#000000", "#000000", "#003300", "#006600", "#009900", "#00CC00", "#00FF00", "#330000", "#333300", "#336600", "#339900", "#33CC00", "#33FF00", "#660000", "#663300", "#666600", "#669900", "#66CC00", "#66FF00",
     "#000000", "#333333", "#000000", "#000033", "#003333", "#006633", "#009933", "#00CC33", "#00FF33", "#330033", "#333333", "#336633", "#339933", "#33CC33", "#33FF33", "#660033", "#663333", "#666633", "#669933", "#66CC33", "#66FF33",
