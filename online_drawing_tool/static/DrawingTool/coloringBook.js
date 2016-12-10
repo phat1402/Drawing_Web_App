@@ -15,8 +15,8 @@ var drawingApp = (function() {
         canvasHeight = 600,
         coloringPic = new Image(),
         loadedIMG = new Image(),
-        locationFixX = -150,
-        locationFixY = -110,
+        locationFixX = -50,
+        locationFixY = -120,
         i,
         paint = false,
         curColor = "rgb(0, 0, 255)",
@@ -47,15 +47,18 @@ var drawingApp = (function() {
         undoData = [],
         undoImg = new Image(),
         changeColoringImage = function(imgFile) {
+            for (i = 1; i < undoData.length; i++) {
+                undoData.pop();
+            }
             clearCanvasO();
+            clearCanvas();
             coloringPic.src = imgFile;
-            img_update();
+            outlineCreate();
         },
 
         saveToServerFunction = function() {
-            imgURL = canvaso.toDataURL("image/png");
             document.getElementById("data").value = imgURL;
-            alert(imgURL);
+            console.log(imgURL);
         },
         cutHex = function(h) {
             return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
@@ -117,7 +120,8 @@ var drawingApp = (function() {
         undoAction = function() {
             contexto.clearRect(0, 0, canvasWidth, canvasHeight);
             contexto.drawImage(undoImg, 0, 0, canvasWidth, canvasHeight);
-            console.log(undoImg);
+            imgURL = canvaso.toDataURL("image/png");
+
 
             if (undoData.length > 1) {
                 undoData.pop();
@@ -128,6 +132,7 @@ var drawingApp = (function() {
             } else {
                 undoImg.src = undoData[0];
                 contexto.fillStyle = "#ffffff";
+                outlineCreate();
                 contexto.fillRect(0, 0, canvasWidth, canvasHeight);
             }
 
@@ -336,7 +341,6 @@ var drawingApp = (function() {
                         if (curTool === "pen" || curTool === "eraser") {
                             context.beginPath();
                             context.moveTo(mouseX, mouseY);
-                            console.log("Pressing")
                         }
 
                         x0 = mouseX;
@@ -373,7 +377,6 @@ var drawingApp = (function() {
 
                         if (curTool === "pen" || curTool === "eraser") {
                             context.lineTo(mouseX, mouseY);
-                            console.log("dragging");
 
                         } else if (curTool === "rect") {
                             var x = Math.min(mouseX, x0),
@@ -453,6 +456,8 @@ var drawingApp = (function() {
                         }
                         undoData.push(canvaso.toDataURL("image/png"));
                         undoImg.src = undoData[undoData.length - 2];
+                        imgURL = canvaso.toDataURL("image/png");
+
 
 
 

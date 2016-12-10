@@ -10,7 +10,7 @@
 
 #drawingCanvas
 {
-	border:1px solid red; 
+	border:1px solid red;
 	height: 600px;
 	width: 1024px;
 	position: absolute;
@@ -18,6 +18,11 @@
 	left: 0;
 	margin: auto;
   z-index: 1000;
+}
+
+.left-150{
+    position: absolute;
+    left: 50px;
 }
 
 #tempCanvas
@@ -38,7 +43,7 @@
  position:absolute;
  margin-top:-100px;
  z-index:5000;
-top: 240px;
+top: 260px;
  left:25px;
  background-color: #000000;
  display:none;
@@ -59,7 +64,7 @@ top: 240px;
     width : 70px;
     height : 70px;
     border-radius: 80px;
-    top: 100px;
+    top: 120px;
     left: -20px;
     border: solid 3px black;
     position: absolute;
@@ -77,7 +82,7 @@ top: 240px;
     background-color: #FFFFFF;
     border-radius: 80px;
     position: absolute;
-    top: 0px;
+    top: 20px;
     left: -20px;
     z-index: 3000;
     border: solid 3px grey;
@@ -95,7 +100,7 @@ top: 240px;
  margin-top: -10px;
  position:absolute;
  z-index:5000;
-top: 50px;
+top: 70px;
  left:25px;
  background-color: #ffffff;
  display:none;
@@ -119,7 +124,7 @@ top: 50px;
     position: absolute;
     background-color: gray;
     border: 1px solid black;
-    top: 200px;
+    top: 220px;
     left: 5px;
     z-index: 3000;
 
@@ -140,13 +145,13 @@ top: 50px;
     width:70px;
     height: 70px;
     border: 3px solid grey;
-    top: 340px;
+    top: 370px;
     left: -20px;
     z-index: 3000;
 
 }
 
-#saveToServerButton{
+#saveToServer{
     max-width: 70%;
     max-height: 70%;
     margin: auto;
@@ -165,7 +170,7 @@ top: 50px;
     width:70px;
     height: 70px;
     border: 3px solid grey;
-    top: 440px;
+    top: 470px;
     left: -20px;
     z-index: 3000;
 }
@@ -189,7 +194,7 @@ top: 50px;
     width:70px;
     height: 70px;
     border: 3px solid grey;
-    top: 540px;
+    top: 570px;
     left: -20px;
     z-index: 3000;
 }

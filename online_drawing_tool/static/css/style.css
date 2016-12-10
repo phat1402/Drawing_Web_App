@@ -335,11 +335,11 @@ input:focus{
 
 /* Placeholders */
 ::-webkit-input-placeholder {
-   color: #ddd;  }
+   color: black;  }
 :-moz-placeholder { /* Firefox 18- */
-   color: red;  }
+   color: black;  }
 ::-moz-placeholder {  /* Firefox 19+ */
-   color: red;  }
+   color: black;  }
 :-ms-input-placeholder {
    color: #333;  }
 
@@ -570,10 +570,13 @@ background: rgb(242, 118, 46);
 .selection_bar{
     height: 600px;
     overflow: scroll;
-	left: 150px;
+	left: 50px;
 }
 .ma-bot-30{
     margin-bottom: 30px;
+}
+.ma-bot-10{
+    margin-bottom: 10px;
 }
 .image_selection img{
    margin-bottom: 20px;
@@ -583,4 +586,12 @@ background: rgb(242, 118, 46);
 .gallery_item a img{
     width:165px !important;
     height: 165px !important;
+}
+
+.saveForm {
+    background-color: #F2762E;
+}
+
+.saveModal{
+    z-index: 9999!important;
 }
