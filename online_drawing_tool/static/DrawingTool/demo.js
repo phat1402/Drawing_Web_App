@@ -16,7 +16,7 @@ var drawingApp = (function() {
         coloringPic = new Image(),
         loadedIMG = new Image(),
         locationFixX = -150,
-        locationFixY = -110,
+        locationFixY = -130,
         i,
         paint = false,
         curColor = "rgb(0, 0, 255)",
@@ -33,7 +33,6 @@ var drawingApp = (function() {
         curColorG = 0,
         curColorB = 255,
         size_select,
-        undo_button,
         clear_button,
         save_button,
         imgURL,
@@ -44,8 +43,7 @@ var drawingApp = (function() {
         colorLayerData,
         outlineLayerData,
         saveImageToServer,
-        undoData = [],
-        undoImg = new Image(),
+
         changeColoringImage = function(imgFile) {
             clearCanvasO();
             coloringPic.src = imgFile;
@@ -109,14 +107,6 @@ var drawingApp = (function() {
         },
         ev_size_change = function(e) {
             curSize = this.value / 3;
-        },
-        undoAction = function() {
-            undoData.pop();
-            undoImg.src = undoData[undoData.length - 1];
-            contexto.clearRect(0, 0, canvasWidth, canvasHeight);
-            contexto.drawImage(undoImg, 0, 0, canvasWidth, canvasHeight);
-            console.log(undoImg);
-
         },
         clearCanvas = function() {
 
@@ -431,13 +421,9 @@ var drawingApp = (function() {
                         context.beginPath();
                         drag(e);
                         paint = false;
-
                         if (curTool !== "bucket") {
                             img_update();
                         }
-                        undoData.push(canvaso.toDataURL("image/png"));
-
-
                     }
                 },
                 cancel = function(e) {
@@ -451,7 +437,6 @@ var drawingApp = (function() {
 
 
             size_select.addEventListener('click', ev_size_change, false);
-            undo_button.addEventListener('click', undoAction, false);
             clear_button.addEventListener('click', clearCanvasO, false);
             saveToServer.addEventListener('click', saveToServerFunction, false);
 
@@ -517,7 +502,6 @@ var drawingApp = (function() {
             img_update();
 
             size_select = document.getElementById("sizeSelector");
-            undo_button = document.getElementById("undoButton");
             clear_button = document.getElementById("clearButton");
             saveToServer = document.getElementById("saveToServer");
 
@@ -531,8 +515,6 @@ var drawingApp = (function() {
 
             loadedIMG.onload = resourceLoaded;
             loadedIMG.src = wallURL;
-
-            undoData[0] = wallURL;
 
             console.log("loaded");
 
@@ -566,7 +548,7 @@ var drawingApp = (function() {
 }());
 
 
-var colorPalette = [ //Begin array of color table hex color codes. 21 x 12
+var colorPalette = [ //Begin array of color table hex color codes.
 
     "#000000", "#000000", "#000000", "#000000", "#003300", "#006600", "#009900", "#00CC00", "#00FF00", "#330000", "#333300", "#336600", "#339900", "#33CC00", "#33FF00", "#660000", "#663300", "#666600", "#669900", "#66CC00", "#66FF00",
     "#000000", "#333333", "#000000", "#000033", "#003333", "#006633", "#009933", "#00CC33", "#00FF33", "#330033", "#333333", "#336633", "#339933", "#33CC33", "#33FF33", "#660033", "#663333", "#666633", "#669933", "#66CC33", "#66FF33",
