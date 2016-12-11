@@ -12,4 +12,5 @@ urlpatterns = [
     url(r'^logout$', views.log_out),
     url(r'^like_blog$', views.like_ajax, name='like'),
     url(r'^saveimage$', views.saveimage),
+
 ]
