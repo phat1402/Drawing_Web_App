@@ -139,11 +139,32 @@ class DjangoSession(models.Model):
         db_table = 'django_session'
 
 
+class Followed(models.Model):
+    fed_id = models.IntegerField(primary_key=True)
+    username = models.ForeignKey('UserInfor', models.DO_NOTHING, db_column='username', blank=True, null=True)
+    followed = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'followed'
+
+
+class Following(models.Model):
+    fing_id = models.IntegerField(primary_key=True)
+    username = models.ForeignKey('UserInfor', models.DO_NOTHING, db_column='username', blank=True, null=True)
+    follower = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'following'
+
+
 class Photo(models.Model):
     photo_id = models.CharField(primary_key=True, max_length=100)
     gallery = models.ForeignKey('UserGallery', models.DO_NOTHING, blank=True, null=True)
     photo_link = models.CharField(max_length=1000, blank=True, null=True)
     username = models.ForeignKey('UserInfor', models.DO_NOTHING, db_column='username', blank=True, null=True)
+    photo_name = models.CharField(max_length=1000, blank=True, null=True)
 
     class Meta:
         managed = False
@@ -159,12 +180,14 @@ class Photolike(models.Model):
         managed = False
         db_table = 'photolike'
 
-
 class Report(models.Model):
     report_id = models.CharField(primary_key=True, max_length=30)
-    username = models.ForeignKey('UserInfor', models.DO_NOTHING, related_name='userinfo', db_column='username', blank=True, null=True)
-    reported_username = models.ForeignKey('UserInfor', models.DO_NOTHING, related_name='reported_username', db_column='reported_username', blank=True, null=True)
-    reported_photoid = models.ForeignKey(Photo, models.DO_NOTHING, db_column='reported_photoid', blank=True, null=True)
+    username = models.ForeignKey('UserInfor', models.DO_NOTHING, related_name='userinfo', db_column='username',
+                                     blank=True, null=True)
+    reported_username = models.ForeignKey('UserInfor', models.DO_NOTHING, related_name='reported_username',
+                                              db_column='reported_username', blank=True, null=True)
+    reported_photoid = models.ForeignKey(Photo, models.DO_NOTHING, db_column='reported_photoid', blank=True,
+                                             null=True)
 
     class Meta:
         managed = False

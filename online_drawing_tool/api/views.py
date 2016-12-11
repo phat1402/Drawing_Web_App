@@ -57,6 +57,13 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         passregister = request.POST.get('passregister')
         confirmedpass = request.POST.get('confirmedpass')
 
+        if (gender == 'male'):
+            gender_db = 'M'
+        elif (gender == 'female'):
+            gender_db = 'F'
+        else:
+            gender_db = 'O'
+
         print(username)
         print(fullname)
         print(emailregister)
@@ -80,7 +87,10 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             data.update(
                 {'result_2': 'efailed', 'message_2': 'Sorry! This email has already been used. Please try another.'})
         if (not (userinfo_username) and not (userinfo_email)):
-            UserInfor.objects.create(username=username, fullname=fullname, DOB=dob,gender=gender,email=emailregister, password=passregister)
+            UserInfor.objects.create(username=username, fullname=fullname, dob =dob,gender=gender_db,email=emailregister, password=passregister)
+            gallery_id = username + '_' + str(int(round(time.time() * 1000)))
+            username_obj = UserInfor.objects.get( username = username)
+            UserGallery.objects.create(gallery_id = gallery_id, username = username_obj)
             data = {'result': 'success', 'message_3': 'Successfully create new account.'}
         print data
 
@@ -165,6 +175,7 @@ def saveimage(request):
     image_name = name + '.png'
     imgData = data_base64.split(',')[1]
 
+    print imgData
     #Generate Path
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # THIS DIRECTORY DEPENDS ON OS
     USERPHOTO_DIRS = join(BASE_DIR, 'static/user_photo/')
@@ -182,7 +193,7 @@ def saveimage(request):
     username_obj = UserInfor.objects.get( username = username)
     photo_link = '/static/user_photo/' + image_name
     print gallery_id
-    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=photo_link, username=username_obj)
+    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=photo_link, photo_name=name , username=username_obj)
     print 'Generate Database'
 
     return HttpResponse(message)
