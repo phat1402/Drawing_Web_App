@@ -47,10 +47,24 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
         username = request.POST.get('username')
         fullname = request.POST.get('fullname')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('date_of_birth')
         emailregister = request.POST.get('emailregister')
         passregister = request.POST.get('passregister')
         confirmedpass = request.POST.get('confirmedpass')
-        address = request.POST.get('address')
+
+        if (gender == 'male'):
+            gender_db = 'M'
+        elif (gender == 'female'):
+            gender_db = 'F'
+        else:
+            gender_db = 'O'
+
+        print(username)
+        print(fullname)
+        print(emailregister)
+        print(passregister)
+        print(confirmedpass)
 
         try:
             userinfo_username = UserInfor.objects.get(username=request.POST['username'])
@@ -58,16 +72,25 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             userinfo_username = None
 
         try:
-            userinfo_email = UserInfor.objects.get(username=request.POST['emailregister'])
+            userinfo_email = UserInfor.objects.get(email=request.POST['emailregister'])
         except UserInfor.DoesNotExist:
             userinfo_email = None
+        data = {}
+        if (userinfo_username):
+            data.update(
+                {'result_1': 'ufailed', 'message_1': 'Sorry! This username has already been used. Please try another.'})
+        if (userinfo_email):
+            data.update(
+                {'result_2': 'efailed', 'message_2': 'Sorry! This email has already been used. Please try another.'})
+        if (not (userinfo_username) and not (userinfo_email)):
+            UserInfor.objects.create(username=username, fullname=fullname, dob =dob,gender=gender_db,email=emailregister, password=passregister)
+            gallery_id = username + '_' + str(int(round(time.time() * 1000)))
+            username_obj = UserInfor.objects.get( username = username)
+            UserGallery.objects.create(gallery_id = gallery_id, username = username_obj)
+            data = {'result': 'success', 'message_3': 'Successfully create new account.'}
+        print data
 
-        if (not(userinfo_username) and not(userinfo_email)):
-            UserInfor.objects.create(username=username, fullname=fullname, email=emailregister,password=passregister)
-        else:
-            print("The username or email is already existent")
-        return self.render_json_response({
-            'success': True})
+        return HttpResponse(json.dumps(data))
 
 
 #def autocomplete_search(request):
@@ -184,9 +207,9 @@ def saveimage(request):
     data_base64 = request.POST.get('data_base64')
     image_name = name + '.png'
     imgData = data_base64.split(',')[1]
-
-    # Generate Path
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # THIS DIRECTORY DEPENDS ON OS
+    print imgData
+    #Generate Path
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # THIS DIRECTORY DEPENDS ON OS
     USERPHOTO_DIRS = join(BASE_DIR, 'static/user_photo/')
     REAL_DIR = USERPHOTO_DIRS + image_name
     message = 'Save Image Successfully'
@@ -199,7 +222,11 @@ def saveimage(request):
     # Add Infor to database
     photo_id = username + '_' + str(int(round(time.time() * 1000)))
     gallery_id = UserGallery.objects.filter(username=username).values('gallery_id')[0]['gallery_id']
-    username_obj = UserInfor.objects.get(username=username)
+    username_obj = UserInfor.objects.get( username = username)
+    photo_link = '/static/user_photo/' + image_name
+    print gallery_id
+    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=photo_link, photo_name=name , username=username_obj)
+    print 'Generate Database'
 
     Photo.objects.create(photo_id=photo_id, gallery_id=gallery_id, photo_link=image_name, username=username_obj)
     return HttpResponse(message)
