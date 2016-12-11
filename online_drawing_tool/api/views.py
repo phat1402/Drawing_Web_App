@@ -2,15 +2,17 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo
+from api.models import UserInfor,Photo,Following,Followed
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
-from models import UserInfor
+
 from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+
+
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -18,7 +20,7 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         email = request.POST.get('email')
         password = request.POST.get('pass')
 
-        print request.is_ajax()
+        print (request.is_ajax())
         print(email)
         print(password)
         try:
@@ -38,7 +40,7 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         else:
             print("Invalid username")
             data = {'result': 'failed', 'messages': 'Sorry! Either your username or password is incorrect'}
-        print data['result']
+        print (data['result'])
 
         return HttpResponse(json.dumps(data))
 
@@ -116,3 +118,64 @@ def log_out(request):
     except KeyError:
         pass
     return render(request,"index.html")
+
+
+def followstatus(request):
+    user = request.session.get('username',False)
+
+    if (request.method == 'GET'):
+        name = request.GET.get('u','')
+        print (user, '  ',name)
+        valid = UserInfor.objects.filter(username__exact = name).exists()
+        if (not user):
+            return render_to_response('isFollowed.html',{'stat':3})
+        if (not valid):
+            return render_to_response('isFollowed.html', {'stat': 404})
+        if (user == name):
+            return render_to_response('isFollowed.html', {'stat': 2})
+        else :
+            #query = '''Select username from following where username = %s and follower = %s '''
+            # , [name, user]
+            isFollowed = Following.objects.filter(username__exact = name,follower__exact = user).count()
+            #print (querySet.query)
+            if (isFollowed > 0):
+                return render_to_response('isFollowed.html', {'stat': 1})
+            else : return render_to_response('isFollowed.html', {'stat': 0})
+
+
+def follow(request):
+    user = request.session.get('username',False)
+    name = request.GET.get('u','')
+    if(not user):
+        return render(request,"index.html")
+    else:
+        val=request.GET.get('val')
+        print (val)
+        if (val == 'Unfollow'):
+            print('Begin to unfollow')
+            #sth here
+            pinstance = Following.objects.get(username=name, follower=user)
+            pinstance.delete()
+            zinstance = Followed.objects.get(username=user, followed= name)
+            zinstance.delete()
+            return render_to_response('isFollowed.html',{'stat':1,'case':'Follow'})
+        if (val == 'Follow'):
+            print('Begin to Follow')
+            tempWing = UserInfor(username= name)
+            p = Following(  username = tempWing, follower=user)
+            p.save()
+            tempEd= UserInfor(username=user)
+            z = Followed (username = tempEd, followed= name)
+            z.save()
+            #sth here
+            return render_to_response('isFollowed.html',{'stat':0,'case':'Unfollow'})
+
+def getFollower(request):
+    name = request.GET.get('u', '')
+    num = Following.objects.filter(username__exact=name).count()
+    return render_to_response('followerNum.html',{'num': num})
+
+def getFollowing(request):
+    name = request.GET.get('u', '')
+    num = Following.objects.filter(follower__exact=name).count()
+    return render_to_response('followingNum.html',{'num': num})

@@ -26,5 +26,8 @@ urlpatterns = [
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^api/', include(api.urls, namespace='api')),
+    url(r'^dummyfollow',views.DummyFollow.as_view(), name='DummyFollow'),
+    url(r'^usergallery',views.UserGallery.as_view(),name='UserGallery'),
+
 ]
 

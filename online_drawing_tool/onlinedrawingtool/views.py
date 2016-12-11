@@ -37,3 +37,12 @@ class NewsFeed(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(NewsFeed, self).get(request, *args, **kwargs)
+
+class DummyFollow(generic.TemplateView):
+    template_name = 'dummyFollow.html'
+    def get(self, request, *args, **kwargs):
+        return super(DummyFollow, self).get(request, *args, **kwargs)
+class UserGallery(generic.TemplateView):
+    template_name = 'othergallery.html'
+    def get(self, request, *args, **kwargs):
+        return super(UserGallery, self).get(request, *args, **kwargs)

@@ -138,6 +138,25 @@ class DjangoSession(models.Model):
         managed = False
         db_table = 'django_session'
 
+class Followed(models.Model):
+    fed_id = models.IntegerField(primary_key=True)
+    username = models.ForeignKey('UserInfor', models.DO_NOTHING, db_column='username', blank=True, null=True)
+    followed = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'followed'
+
+
+class Following(models.Model):
+    fing_id = models.IntegerField(primary_key=True)
+    username = models.ForeignKey('UserInfor', models.DO_NOTHING, db_column='username', blank=True, null=True)
+    follower = models.CharField(max_length=255, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'following'
+
 
 class Photo(models.Model):
     photo_id = models.CharField(primary_key=True, max_length=100)
