@@ -51,10 +51,17 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
         username = request.POST.get('username')
         fullname = request.POST.get('fullname')
+        gender = request.POST.get('gender')
+        dob = request.POST.get('date_of_birth')
         emailregister = request.POST.get('emailregister')
         passregister = request.POST.get('passregister')
         confirmedpass = request.POST.get('confirmedpass')
-        address = request.POST.get('address')
+
+        print(username)
+        print(fullname)
+        print(emailregister)
+        print(passregister)
+        print(confirmedpass)
 
         try:
             userinfo_username = UserInfor.objects.get(username=request.POST['username'])
@@ -62,16 +69,22 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
             userinfo_username = None
 
         try:
-            userinfo_email = UserInfor.objects.get(username=request.POST['emailregister'])
+            userinfo_email = UserInfor.objects.get(email=request.POST['emailregister'])
         except UserInfor.DoesNotExist:
             userinfo_email = None
+        data = {}
+        if (userinfo_username):
+            data.update(
+                {'result_1': 'ufailed', 'message_1': 'Sorry! This username has already been used. Please try another.'})
+        if (userinfo_email):
+            data.update(
+                {'result_2': 'efailed', 'message_2': 'Sorry! This email has already been used. Please try another.'})
+        if (not (userinfo_username) and not (userinfo_email)):
+            UserInfor.objects.create(username=username, fullname=fullname, DOB=dob,gender=gender,email=emailregister, password=passregister)
+            data = {'result': 'success', 'message_3': 'Successfully create new account.'}
+        print data
 
-        if (not(userinfo_username) and not(userinfo_email)):
-            UserInfor.objects.create(username=username, fullname=fullname, email=emailregister,password=passregister)
-        else:
-            print("The username or email is already existent")
-        return self.render_json_response({
-            'success': True})
+        return HttpResponse(json.dumps(data))
 
 
 #def autocomplete_search(request):
