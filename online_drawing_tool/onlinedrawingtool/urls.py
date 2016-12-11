@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomePage.as_view(), name='HomePage'),
     url(r'^mygallery', views.MyGallery.as_view(), name='MyGallery'),
-    url(r'^image_detail', views.ImageDetail.as_view(), name='ImageDetail'),
+    url(r'^image_detail(?P<photo_id>[\w-]+)$', views.ImageDetail.as_view(), name='ImageDetail'),
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^api/', include(api.urls, namespace='api')),

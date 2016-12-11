@@ -2,15 +2,19 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo
+from api.models import UserInfor,Photo, Photolike
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
-from models import UserInfor
+from api.models import UserInfor
 from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+import random, string
+from distutils.util import strtobool
+
+
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -18,9 +22,6 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         email = request.POST.get('email')
         password = request.POST.get('pass')
 
-        print request.is_ajax()
-        print(email)
-        print(password)
         try:
             userinfo = UserInfor.objects.get(email=request.POST['email'])
         except UserInfor.DoesNotExist:
@@ -38,7 +39,6 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         else:
             print("Invalid username")
             data = {'result': 'failed', 'messages': 'Sorry! Either your username or password is incorrect'}
-        print data['result']
 
         return HttpResponse(json.dumps(data))
 
@@ -52,14 +52,6 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         passregister = request.POST.get('passregister')
         confirmedpass = request.POST.get('confirmedpass')
         address = request.POST.get('address')
-
-
-        print(username)
-        print(fullname)
-        print(emailregister)
-        print(passregister)
-        print(confirmedpass)
-        print(address)
 
         try:
             userinfo_username = UserInfor.objects.get(username=request.POST['username'])
@@ -116,3 +108,38 @@ def log_out(request):
     except KeyError:
         pass
     return render(request,"index.html")
+
+
+def like_ajax(request, *args, **kwargs):
+    liked = request.GET.get('liked')
+    post_id = request.GET.get('post_id')
+    num_likes = request.GET.get('num_likes')
+    if strtobool(liked):
+        print('unliked')
+        if int(num_likes) > 0:
+            user_liked = Photolike.objects.get(photo_id=post_id)
+            user_liked.delete()
+            likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+            try:
+                del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+            except KeyError:
+                print("keyerror")
+            return HttpResponse(likes, liked)
+        else:
+            likes = 0
+            return HttpResponse(likes, liked)
+    else:
+        print("like")
+        liked = True
+        like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+        while(1):
+            if Photolike.objects.filter(like_id=like_id).count()==0:
+                user_obj = UserInfor.objects.get(username=request.session.get('username'))
+                Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
+                break
+            else:
+                like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+        likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+        return HttpResponse(likes, liked)
