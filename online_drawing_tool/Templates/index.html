@@ -262,19 +262,23 @@
     });
 
     $('#saveToServer').on('click', function () {
+        var photo_name =  document.getElementById('imageName').value;
         var data =  document.getElementById('data').value;
 
-        alert(data);
-{#        $.ajax({#}
-{#            method: 'POST',#}
-{#            url: '/api/logout',#}
-{#            data: {},#}
-{#            success: function (data) {#}
-{#                location.reload();#}
-{##}
-{#            }.bind(this)#}
-{##}
-{#        });#}
+
+        $.ajax({
+            method: 'POST',
+            url: '/api/saveimage',
+            data: {
+                image_name: photo_name,
+                data_base64: data
+            },
+            success: function (data) {
+                location.reload();
+                alert(data)
+            }.bind(this)
+
+        });
     });
 
 </script>
