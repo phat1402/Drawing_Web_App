@@ -35,7 +35,7 @@ var drawingApp = (function() {
         size_select,
         undo_button,
         clear_button,
-        save_button,
+        saveToServer,
         imgURL,
         saveInt = 0,
         x0,
@@ -47,15 +47,18 @@ var drawingApp = (function() {
         undoData = [],
         undoImg = new Image(),
         changeColoringImage = function(imgFile) {
+            for (i = 1; i < undoData.length; i++) {
+                undoData.pop();
+            }
             clearCanvasO();
+            clearCanvas();
             coloringPic.src = imgFile;
-            img_update();
+            outlineCreate();
         },
 
         saveToServerFunction = function() {
             document.getElementById("data").value = imgURL;
             console.log(imgURL);
-            alert(imgURL);
         },
         cutHex = function(h) {
             return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
@@ -129,20 +132,7 @@ var drawingApp = (function() {
             } else {
                 undoImg.src = undoData[0];
                 contexto.fillStyle = "#ffffff";
-                contexto.fillRect(0, 0, canvasWidth, canvasHeight);
-            }
-
-
-
-            if (undoData.length > 1) {
-                undoData.pop();
-            }
-
-            if (undoData.length > 1) {
-                undoImg.src = undoData[undoData.length - 2];
-            } else {
-                undoImg.src = undoData[0];
-                contexto.fillStyle = "#ffffff";
+                outlineCreate();
                 contexto.fillRect(0, 0, canvasWidth, canvasHeight);
             }
 
@@ -467,6 +457,7 @@ var drawingApp = (function() {
                         undoData.push(canvaso.toDataURL("image/png"));
                         undoImg.src = undoData[undoData.length - 2];
                         imgURL = canvaso.toDataURL("image/png");
+
 
 
 

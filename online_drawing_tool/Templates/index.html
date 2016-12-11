@@ -33,7 +33,7 @@
                 <li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
                 <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
                 <li><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
-                <li><a href="#" accesskey="4" title="">Newsfeed</a></li>
+                <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
 {#                {% if request.session.username %}#}
 {#                    <li> <a class="login-success" href="#"> {{ request.session.username }} <span class="arrow">&#9660;</span></a></li>#}
 {#                    <li><a href="#" id="logout_link">Log Out</a></li>#}
@@ -98,7 +98,7 @@
          <canvas id = "tempCanvas" width = "1024" height = "600"></canvas>
 
          <p><!-- Tool Selector -->
-                 <div id="colorTable"></div> 
+                 <div id="colorTable"></div>
  <!-- Toggle Color Button -->
                  <div id="color" title="Toggle Color" width = "5" height = "5">
                  </div>
@@ -149,12 +149,12 @@
                 </div>
 
 
-                   <form action="saveImage" method="POST">
-                       <input id="data" type="hidden" value=""  name="imgurl"/>
+
+
                        <div id="saveDiv" >
                            <img id="saveToServerButton" src="{% static 'DrawingTool/images/save.png' %}" alt="submit" data-toggle="modal" data-target="#myModal"></img>
                        </div>
-                   </form>
+
 
 
 
@@ -175,6 +175,7 @@
         </div>
         <div class="modal-body">
             <input id ="imageName" type="text" placeholder="Input your photo name" class="ma-bot-10">
+            <input id="data" type="hidden" value=""  name="imgurl"/>
             <input id = "saveToServer" type="submit" value="Submit" class="saveForm">
         </div>
         <div class="modal-footer">
@@ -199,7 +200,7 @@
 {% endblock %}
 
 <script>
-    "use strict";
+    "use strict";a
     function getCookie(name) {
         var cookieValue = null;
         if (document.cookie && document.cookie !== '') {
