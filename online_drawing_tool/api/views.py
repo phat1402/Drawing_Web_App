@@ -167,8 +167,9 @@ def saveimage(request):
     photo_id = username+ '_' + str(int(round(time.time() * 1000)))
     gallery_id = UserGallery.objects.filter(username=username).values('gallery_id')[0]['gallery_id']
     username_obj = UserInfor.objects.get( username = username)
+    photo_link = '/static/user_photo/' + image_name
     print gallery_id
-    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=image_name, username=username_obj)
+    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=photo_link, username=username_obj)
     print 'Generate Database'
 
     return HttpResponse(message)
