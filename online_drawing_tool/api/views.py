@@ -1,22 +1,18 @@
 from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
-from django.apps import apps
 from api.models import UserInfor,Photo,UserGallery,Photolike
-from django.http import HttpResponse
-import json as simplejson
-from django.shortcuts import render_to_response
 from api.models import UserInfor
 from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
-from django.template import RequestContext
-import random, string
-from distutils.util import strtobool
+import random
+import string
 import base64
 import os
 import time
 from os.path import dirname, join, exists
+
 
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
@@ -128,6 +124,7 @@ def search_titles(request):
         results_Photo =''
     return render_to_response('ajax_search.html', {'results':results_Photo})
 
+
 def log_out(request):
     try:
         del request.session['username']
@@ -135,46 +132,81 @@ def log_out(request):
         pass
     return render(request,"index.html")
 
+
 def like_ajax(request, *args, **kwargs):
-    liked = request.GET.get('liked')
+    liked = request.GET.get('liked_db')
     post_id = request.GET.get('post_id')
     num_likes = request.GET.get('num_likes')
-    if strtobool(liked):
+    # request.session[request.session.get('username') + '_has_liked' + post_id] = False
+    print(request.session.get(request.session.get('username') + '_has_liked' + post_id))
+    print(liked)
+    if request.session.get(request.session.get('username') + '_has_liked' + post_id) is None:
+        if liked == 'True':
+            if int(num_likes) > 0:
+                user_liked = Photolike.objects.get(photo_id=post_id)
+                user_liked.delete()
+                likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+                liked = 'False'
+                # try:
+                #    del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+                # except KeyError:
+                #    print("keyerror")
+                data = {'likes': likes, 'liked': liked}
+                return HttpResponse(json.dumps(data))
+            else:
+                liked = 'False'
+                likes = 0
+
+                data = {'likes': likes, 'liked': liked}
+                return HttpResponse(json.dumps(data))
+
+        else:
+            liked = 'True'
+            request.session[request.session.get('username') + '_has_liked' + post_id] = True
+            like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+            while(1):
+                if Photolike.objects.filter(like_id=like_id).count()==0:
+                    user_obj = UserInfor.objects.get(username=request.session.get('username'))
+                    Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
+                    break
+                else:
+                    like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+            likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+            data = {'likes': likes, 'liked': liked}
+            return HttpResponse(json.dumps(data))
+
+    if request.session[request.session.get('username') + '_has_liked' + post_id] is True:
         print('unliked')
-        if int(num_likes) > 0:
+        likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+        if likes > 0:
+            liked = 'False'
             user_liked = Photolike.objects.get(photo_id=post_id)
             user_liked.delete()
             likes = Photolike.objects.filter(photo__photo_id=post_id).count()
             try:
-                del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+                del request.session[request.session.get('username') + '_has_liked' + post_id]
             except KeyError:
                 print("keyerror")
-            return HttpResponse(likes, liked)
+            data = {'likes': likes, 'liked': liked}
+            return HttpResponse(json.dumps(data))
         else:
+            liked = 'False'
             likes = 0
-            return HttpResponse(likes, liked)
-    else:
-        print("like")
-        liked = True
-        like_id = ''.join(random.choice(string.digits) for i in range(13))
+            try:
+                del request.session[request.session.get('username') + '_has_liked' + post_id]
+            except KeyError:
+                print("keyerror")
+            data = {'likes': likes, 'liked': liked}
+            return HttpResponse(json.dumps(data))
 
-        while(1):
-            if Photolike.objects.filter(like_id=like_id).count()==0:
-                user_obj = UserInfor.objects.get(username=request.session.get('username'))
-                Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
-                break
-            else:
-                like_id = ''.join(random.choice(string.digits) for i in range(13))
 
-        likes = Photolike.objects.filter(photo__photo_id=post_id).count()
-        return HttpResponse(likes, liked)
-      
 def saveimage(request):
     name = request.POST.get('image_name')
     data_base64 = request.POST.get('data_base64')
     image_name = name + '.png'
     imgData = data_base64.split(',')[1]
-
     print imgData
     #Generate Path
     BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # THIS DIRECTORY DEPENDS ON OS
@@ -184,11 +216,11 @@ def saveimage(request):
     with open(REAL_DIR, "wb") as fh:
         fh.write(base64.decodestring(imgData))
 
-    #Get Username infor
+    # Get Username infor
     username = request.session['username']
 
-    #Add Infor to database
-    photo_id = username+ '_' + str(int(round(time.time() * 1000)))
+    # Add Infor to database
+    photo_id = username + '_' + str(int(round(time.time() * 1000)))
     gallery_id = UserGallery.objects.filter(username=username).values('gallery_id')[0]['gallery_id']
     username_obj = UserInfor.objects.get( username = username)
     photo_link = '/static/user_photo/' + image_name
@@ -196,5 +228,5 @@ def saveimage(request):
     Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=photo_link, photo_name=name , username=username_obj)
     print 'Generate Database'
 
+    Photo.objects.create(photo_id=photo_id, gallery_id=gallery_id, photo_link=image_name, username=username_obj)
     return HttpResponse(message)
-

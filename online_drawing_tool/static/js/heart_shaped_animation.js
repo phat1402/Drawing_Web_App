@@ -100,14 +100,17 @@ $(document).ready(function () {
         $.ajax({
             type: 'GET',
             url : 'api/like_blog',
+            dataType: 'json',
             data:{
                 post_id:id,
                 num_likes:num_likes,
-                liked:liked
+                liked_db:liked
             },
             success: function(response){
-                //$('.like_count_blog').html(response);
-                location.reload();
+                //alert (response.liked);
+                $('.like_count_blog').html(response.likes);
+                $('.heart-particle-box').attr('data-liked',response.liked);
+                //location.reload();
             }
         })
     });

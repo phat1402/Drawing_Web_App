@@ -40,6 +40,7 @@ class ImageDetail(generic.TemplateView):
         kwargs['photo_link_db'] = photo.photo_link
         kwargs['photo_title'] = photo.photo_name
         photo_id = photo.pk
+        kwargs['photo_link_db'] = photo.photo_link
         print(photo_id)
         photo_liked = Photolike.objects.filter(photo__photo_id=photo_id)
         try:
