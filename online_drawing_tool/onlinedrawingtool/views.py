@@ -49,6 +49,7 @@ class ImageDetail(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         photo = get_object_or_404(Photo, photo_id = kwargs['photo_id'])
         photo_id = photo.pk
+        kwargs['photo_link_db'] = photo.photo_link
         print(photo_id)
         photo_liked = Photolike.objects.filter(photo__photo_id=photo_id)
         try:
