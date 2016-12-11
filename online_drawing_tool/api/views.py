@@ -2,7 +2,7 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo,UserGallery
+from api.models import UserInfor,Photo,UserGallery,Photolike
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
@@ -11,6 +11,8 @@ from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+import random, string
+from distutils.util import strtobool
 import base64
 import os
 import time
@@ -122,6 +124,39 @@ def log_out(request):
         pass
     return render(request,"index.html")
 
+def like_ajax(request, *args, **kwargs):
+    liked = request.GET.get('liked')
+    post_id = request.GET.get('post_id')
+    num_likes = request.GET.get('num_likes')
+    if strtobool(liked):
+        print('unliked')
+        if int(num_likes) > 0:
+            user_liked = Photolike.objects.get(photo_id=post_id)
+            user_liked.delete()
+            likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+            try:
+                del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+            except KeyError:
+                print("keyerror")
+            return HttpResponse(likes, liked)
+        else:
+            likes = 0
+            return HttpResponse(likes, liked)
+    else:
+        print("like")
+        liked = True
+        like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+        while(1):
+            if Photolike.objects.filter(like_id=like_id).count()==0:
+                user_obj = UserInfor.objects.get(username=request.session.get('username'))
+                Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
+                break
+            else:
+                like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+        likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+        return HttpResponse(likes, liked)
 
 def saveimage(request):
     name = request.POST.get('image_name')
