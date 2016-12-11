@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^image_detail', views.ImageDetail.as_view(), name='ImageDetail'),
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
+    url(r'^friend_image_detail', views.FriendImageDetail.as_view(), name='FriendImageDetail'),
     url(r'^api/', include(api.urls, namespace='api')),
 ]
 

@@ -57,7 +57,7 @@ var drawingApp = (function() {
         },
 
         saveToServerFunction = function() {
-            document.getElementById("data").value = imgURL;
+            //document.getElementById("data").value = imgURL;
             console.log(imgURL);
         },
         cutHex = function(h) {
@@ -120,7 +120,7 @@ var drawingApp = (function() {
         undoAction = function() {
             contexto.clearRect(0, 0, canvasWidth, canvasHeight);
             contexto.drawImage(undoImg, 0, 0, canvasWidth, canvasHeight);
-            imgURL = canvaso.toDataURL("image/png");
+            document.getElementById("data").value = canvaso.toDataURL("image/png");
 
 
             if (undoData.length > 1) {
@@ -456,7 +456,7 @@ var drawingApp = (function() {
                         }
                         undoData.push(canvaso.toDataURL("image/png"));
                         undoImg.src = undoData[undoData.length - 2];
-                        imgURL = canvaso.toDataURL("image/png");
+                        document.getElementById("data").value = canvaso.toDataURL("image/png");
 
 
 

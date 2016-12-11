@@ -37,3 +37,9 @@ class NewsFeed(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(NewsFeed, self).get(request, *args, **kwargs)
+
+class FriendImageDetail(generic.TemplateView):
+    template_name = 'newsfeed_image.html'
+
+    def get(self, request, *args, **kwargs):
+        return super(FriendImageDetail, self).get(request, *args, **kwargs)

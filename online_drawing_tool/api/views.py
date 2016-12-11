@@ -2,7 +2,7 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo
+from api.models import UserInfor,Photo,UserGallery
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
@@ -11,6 +11,11 @@ from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
+import base64
+import os
+import time
+from os.path import dirname, join, exists
+
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):
@@ -116,3 +121,33 @@ def log_out(request):
     except KeyError:
         pass
     return render(request,"index.html")
+
+
+def saveimage(request):
+    name = request.POST.get('image_name')
+    data_base64 = request.POST.get('data_base64')
+    image_name = name + '.png'
+    imgData = data_base64.split(',')[1]
+
+    #Generate Path
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) # THIS DIRECTORY DEPENDS ON OS
+    USERPHOTO_DIRS = join(BASE_DIR, 'static/user_photo/')
+    REAL_DIR = USERPHOTO_DIRS + image_name
+    message = 'Save Image Successfully'
+    with open(REAL_DIR, "wb") as fh:
+        fh.write(base64.decodestring(imgData))
+
+    #Get Username infor
+    username = request.session['username']
+
+    #Add Infor to database
+    photo_id = username+ '_' + str(int(round(time.time() * 1000)))
+    gallery_id = UserGallery.objects.filter(username=username).values('gallery_id')[0]['gallery_id']
+    username_obj = UserInfor.objects.get( username = username)
+    print gallery_id
+    Photo.objects.create(photo_id = photo_id, gallery_id=gallery_id, photo_link=image_name, username=username_obj)
+    print 'Generate Database'
+
+    return HttpResponse(message)
+
+
