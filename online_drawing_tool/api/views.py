@@ -6,7 +6,7 @@ from api.models import UserInfor,Photo,UserGallery,Photolike
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
-from models import UserInfor
+from api.models import UserInfor
 from django.http import HttpResponse
 import json
 from django.shortcuts import render, render_to_response
@@ -25,9 +25,6 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         email = request.POST.get('email')
         password = request.POST.get('pass')
 
-        print request.is_ajax()
-        print(email)
-        print(password)
         try:
             userinfo = UserInfor.objects.get(email=request.POST['email'])
         except UserInfor.DoesNotExist:
@@ -45,7 +42,6 @@ class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         else:
             print("Invalid username")
             data = {'result': 'failed', 'messages': 'Sorry! Either your username or password is incorrect'}
-        print data['result']
 
         return HttpResponse(json.dumps(data))
 
@@ -59,14 +55,6 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
         passregister = request.POST.get('passregister')
         confirmedpass = request.POST.get('confirmedpass')
         address = request.POST.get('address')
-
-
-        print(username)
-        print(fullname)
-        print(emailregister)
-        print(passregister)
-        print(confirmedpass)
-        print(address)
 
         try:
             userinfo_username = UserInfor.objects.get(username=request.POST['username'])
@@ -157,7 +145,7 @@ def like_ajax(request, *args, **kwargs):
 
         likes = Photolike.objects.filter(photo__photo_id=post_id).count()
         return HttpResponse(likes, liked)
-
+      
 def saveimage(request):
     name = request.POST.get('image_name')
     data_base64 = request.POST.get('data_base64')
@@ -184,5 +172,4 @@ def saveimage(request):
     print 'Generate Database'
 
     return HttpResponse(message)
-
 

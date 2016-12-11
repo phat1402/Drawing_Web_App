@@ -50,7 +50,12 @@
                 <div class = "col-md-4">
                     <h1> Image Title </h1>
                     <div class="action_bar" style="height: 50px">
-                        <a class="action_button"><img src="{% static 'img/like.svg' %}"></a>
+                        <!--<a class="action_button"><img src="{% static 'img/like.svg' %}"></a>-->
+                        <a class="action_button">
+                            {% block heart_shaped %}
+                                {% include 'heart_shaped.html' %}
+                            {% endblock %}
+                        </a>
                         <a class="action_button"><img src="{% static 'img/share.svg' %}"></a>
                         <a class="action_button"><img src="{% static 'img/report.svg' %}"></a>
                     </div>
@@ -59,6 +64,6 @@
                 </div>
             </div>
         </div>
-
+    <script src="/static/js/heart_shaped_animation.js"></script>
 </body>
 </html>
