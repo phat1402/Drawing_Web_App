@@ -185,12 +185,32 @@ a:hover
 	height: 30px;
 }
 
-	#login-dp{
+#login-dp{
     min-width: 250px;
     padding: 14px 14px 0;
     overflow:hidden;
     background-color:#333;
 }
+
+#loggedin-dp {
+    background-color: #333;
+}
+
+#loggedin-dp li {
+    display: block;
+    width: 100%;
+}
+
+#loggedin-dp li a {
+    display: block;
+    width: 100%;
+    clear: both;
+}
+
+#loggedin-dp li a:hover {
+    background-color: #6c6c6c;
+}
+
 #login-dp #forget_password {
     margin:0px;
     color: rgba(255,255,255,.8);
@@ -215,11 +235,29 @@ a:hover
     text-transform:none;
     color: #fff;
 }
-#exampleInputEmail2 {
-    color:#fff;
+
+.dropdown .dropdown-menu {
+    display: block;
+    opacity: 0;
+
+    -moz-transition: all 1000ms ease;
+    -webkit-transition: all 1000ms ease;
+    -o-transition: all 1000ms ease;
+    -ms-transition: all 1000ms ease;
+    transition: all 1000ms ease;
 }
-#exampleInputPassword2 {
-    color:#fff;
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+    opacity: 1;
+}
+
+#email, #password {
+    color: gray;
+}
+
+#email:focus, #password:focus {
+    color: #fff
 }
 
 .drawingapp {
