@@ -22,11 +22,14 @@ $(function(){
 
     $('#search').on('keyup', function () {
         //if($('#search').val().length!==0){
+        var isChecked = $('#photo-search').is(':checked');
+
         $.ajax({
            type: 'GET',
            url : 'api/search',
            data: {
-               'search_text' : $('#search').val()
+               'search_text' : $('#search').val(),
+
            },
            success: function(response){
 

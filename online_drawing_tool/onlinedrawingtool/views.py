@@ -63,6 +63,36 @@ class ImageDetail(generic.TemplateView):
 
         return super(ImageDetail, self).get(request, *args, **kwargs)
 
+class GalleryImageDetail(generic.TemplateView):
+    template_name = 'image_detail_gallery.html'
+
+    def get(self, request, *args, **kwargs):
+        photo = get_object_or_404(Photo, photo_id = kwargs['photo_id'])
+        kwargs['photo_link_db'] = photo.photo_link
+        kwargs['photo_title'] = photo.photo_name
+        kwargs['username'] = photo.username.username
+        photo_id = photo.pk
+        kwargs['photo_link_db'] = photo.photo_link
+        print(photo_id)
+        photo_liked = Photolike.objects.filter(photo__photo_id=photo_id)
+        try:
+            user_liked = photo_liked.get(username=request.session.get('username'))
+
+
+        except Photolike.DoesNotExist:
+            user_liked = None
+        if user_liked is None:
+            liked = False
+            # request.session['has_liked_' + str(photo_id)] = liked
+        else:
+            liked = True
+
+        kwargs['post'] = photo_id
+        kwargs['liked'] = liked
+        kwargs['num_likes'] = Photolike.objects.filter(photo__photo_id=photo_id).count()
+
+        return super(GalleryImageDetail, self).get(request, *args, **kwargs)
+
 class NewsFeed(generic.TemplateView):
     template_name = 'newsfeed.html'
 

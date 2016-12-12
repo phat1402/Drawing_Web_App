@@ -23,6 +23,7 @@ urlpatterns = [
     url(r'^$', views.HomePage.as_view(), name='HomePage'),
     url(r'^mygallery', views.MyGallery.as_view(), name='MyGallery'),
     url(r'^image_detail(?P<photo_id>[\w-]+)$', views.ImageDetail.as_view(), name='ImageDetail'),
+    url(r'^gallery_item(?P<photo_id>[\w-]+)$', views.GalleryImageDetail.as_view(), name='GalleryImageDetail'),
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^friend_image_detail', views.FriendImageDetail.as_view(), name='FriendImageDetail'),

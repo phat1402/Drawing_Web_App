@@ -533,7 +533,7 @@ position: absolute;
 }
 .searchbox{
     margin-top:0px;
-    background-color: white !important;
+    width: 300px;
 }
 .btn-default:hover{
     background-color: rgb(242, 118, 46);

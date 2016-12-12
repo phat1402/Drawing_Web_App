@@ -36,7 +36,7 @@ token = getCookie('csrftoken');
         }
     });
 
-    $('button').on('click', function () {
+    $('.post-likes').on('click', function () {
         // change button type by clicking
         $('.heart-shaped').toggle();
 

@@ -1,23 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+
     {% if results %}
-
-    {% for result in results %}
-        <li>{{ result.photo_id }}</li>
-    {% endfor %}
-
-{% elif results == '' %}
-        <li></li>
+        {% if select == 'photo' %}
+            {% for result in results %}
+                <a title="Image 1" href="{% url 'GalleryImageDetail' result.photo_id %} ">{{ result.photo_name }}</a>
+            {% endfor %}
+        {% elif select == 'user' %}
+            {% for result in results %}
+                <li>{{ result.username }}</li>
+            {% endfor %}
+        {% endif %}
+    {% elif results == '' %}
     {% else %}
-    <li>No results found!</li>
-{% endif %}
+        <li>No results found!</li>
+    {% endif %}
 
 
-
-</body>
-</html>

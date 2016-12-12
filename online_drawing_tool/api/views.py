@@ -210,15 +210,17 @@ class SendRegisterAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
 
 def search_titles(request):
+    select = 'photo'
     if request.method == 'GET':
-        search_text = request.GET['search_text']
+        search_text = request.GET.get('search_text')
     else:
         search_text = ''
     if (search_text != ''):
-        results_Photo = Photo.objects.filter(photo_id__istartswith = search_text)
+        results_Photo = Photo.objects.filter(photo_name__istartswith=search_text)
     else:
-        results_Photo =''
-    return render_to_response('ajax_search.html', {'results':results_Photo})
+        results_Photo = ''
+    return render_to_response('ajax_search.html', {'results': results_Photo, 'select': select})
+
 
 def log_out(request):
     try:
