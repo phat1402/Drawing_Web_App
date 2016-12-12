@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.db.models import Count, Max, Avg, F, IntegerField, Sum, Case, When
 from django.views import generic
 from django.views.generic.base import ContextMixin
-from api.models import UserInfor, Photolike, Photo
+from api.models import UserInfor, Photolike, Photo, Comment
 from django.shortcuts import get_object_or_404
 
 
@@ -51,6 +51,10 @@ class ImageDetail(generic.TemplateView):
         photo_id = photo.pk
         kwargs['photo_link_db'] = photo.photo_link
         print(photo_id)
+        filter_args_comment = {'photo_id': photo_id, 'username': request.session.get('username')}
+        comment_objs = Comment.objects.filter(**filter_args_comment)
+        print (comment_objs)
+        kwargs['comments'] = comment_objs
         photo_liked = Photolike.objects.filter(photo__photo_id=photo_id)
         try:
             user_liked = photo_liked.get(username=request.session.get('username'))

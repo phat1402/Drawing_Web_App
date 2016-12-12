@@ -1,7 +1,7 @@
 from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
-from api.models import UserInfor,Photo,UserGallery,Photolike
+from api.models import UserInfor, Photo, UserGallery, Photolike, Comment
 from api.models import UserInfor
 from django.http import HttpResponse
 import json
@@ -203,3 +203,22 @@ def saveimage(request):
 
     Photo.objects.create(photo_id=photo_id, gallery_id=gallery_id, photo_link=image_name, username=username_obj)
     return HttpResponse(message)
+
+
+def comment(request):
+    comment_db = request.GET.get('comment_text')
+    photo_id_text = request.GET.get('photo_id')
+    username_to_input_comment_db = UserInfor.objects.get(username=request.session.get('username'))
+    photo_id_to_input_comment_db = Photo.objects.get(photo_id=photo_id_text)
+    comment_id_text = ''.join(random.choice(string.digits) for i in range(13))
+    comment_input_db = request.session.get('username') + '-' + comment_id_text
+    while (1):
+        if Comment.objects.filter(like_id=comment_input_db).count() == 0:
+            Comment.objects.create(comment_id=comment_input_db, content=comment_db,
+                                   username=username_to_input_comment_db, photo_id=photo_id_to_input_comment_db)
+            break
+        else:
+            comment_id_text = ''.join(random.choice(string.digits) for i in range(13))
+            comment_input_db = request.session.get('username') + '-' + comment_id_text
+    data = {'comment': comment_db, 'username': request.session.get('username')}
+    return HttpResponse(json.dumps(data))

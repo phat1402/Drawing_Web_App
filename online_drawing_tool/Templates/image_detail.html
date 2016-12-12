@@ -61,8 +61,13 @@
                         <a class="action_button"><img src="{% static 'img/share.svg' %}" id="share_fb"></a>
                         <a class="action_button"><img src="{% static 'img/report.svg' %}"></a>
                     </div>
-                    <textarea class="form-control" rows="5" placeholder="Comment"></textarea>
-                    <button class="btn btn-default ma-top-10 float-right" type="submit">Send</button>
+                    <ul id = 'list_comment'>
+                        {% for comment in comments %}
+                            <li>{{ request.session.username }} + ' has said: ' + {{ comment }}</li>
+                        {% endfor %}
+                    </ul>
+                    <textarea class="form-control" id="comment" rows="5" placeholder="Comment"></textarea>
+                    <button class="btn btn-default ma-top-10 float-right" id = 'send_comment'>Send</button>
                 </div>
             </div>
         </div>
@@ -72,6 +77,25 @@
                 window.open("https://www.facebook.com/sharer/sharer.php?u=" + encodeURIComponent(window.location.href) + "&t=" + encodeURIComponent(document.title), '',
                         'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600,left=100,top=100');
                 return false;
+            });
+
+            $('#send_comment').click(function () {
+                var comment = document.getElementById('comment').value;
+                var id;
+                id = $('.heart-particle-box').attr('data-post-id');
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/comment',
+                    data: {
+                        'comment_text': comment,
+                        'photo_id': id
+                    },
+                    success: function (response) {
+
+                        $('#list_comment').append("<li>" + response.username + ' has said: ' +  response.comment + "</li>")
+
+                    }
+                })
             })
         })
     </script>
