@@ -122,21 +122,11 @@
                 <div class="col-md-8">
                     <div  class="row ">
                         {% for photo in photos %}
-                            <!--<div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href=""><img class="thumbnail img-responsive" src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 2" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 3" href="#"><img class="thumbnail img-responsive " src="{% static 'img/brush.svg' %}"></a></div>-->
-                            <div class="col-lg-3 col-sm-4 col-xs-6 "><a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} "><img class="thumbnail img-responsive" src="{{ photo.photo_link }}"></a></div>
+                            <div class="col-lg-3 col-sm-4 col-xs-6 ">
+                                <a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} ">
+                                    <img class="thumbnail img-responsive" src="{{ photo.photo_link }}">
+                                </a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>

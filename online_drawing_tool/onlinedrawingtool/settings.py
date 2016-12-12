@@ -136,6 +136,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+USERPHOTO_DIRS = join(BASE_DIR, 'static/user_photo/')
+
+
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
