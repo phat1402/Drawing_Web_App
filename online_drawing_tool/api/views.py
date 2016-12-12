@@ -135,39 +135,107 @@ def log_out(request):
         pass
     return render(request,"index.html")
 
+# def like_ajax(request, *args, **kwargs):
+#     liked = request.GET.get('liked')
+#     post_id = request.GET.get('post_id')
+#     num_likes = request.GET.get('num_likes')
+#     if strtobool(liked):
+#         print('unliked')
+#         if int(num_likes) > 0:
+#             user_liked = Photolike.objects.get(photo_id=post_id)
+#             user_liked.delete()
+#             likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+#             try:
+#                 del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+#             except KeyError:
+#                 print("keyerror")
+#             return HttpResponse(likes, liked)
+#         else:
+#             likes = 0
+#             return HttpResponse(likes, liked)
+#     else:
+#         print("like")
+#         liked = True
+#         like_id = ''.join(random.choice(string.digits) for i in range(13))
+#
+#         while(1):
+#             if Photolike.objects.filter(like_id=like_id).count()==0:
+#                 user_obj = UserInfor.objects.get(username=request.session.get('username'))
+#                 Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
+#                 break
+#             else:
+#                 like_id = ''.join(random.choice(string.digits) for i in range(13))
+#
+#         likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+#         return HttpResponse(likes, liked)
+
 def like_ajax(request, *args, **kwargs):
-    liked = request.GET.get('liked')
-    post_id = request.GET.get('post_id')
-    num_likes = request.GET.get('num_likes')
-    if strtobool(liked):
-        print('unliked')
-        if int(num_likes) > 0:
-            user_liked = Photolike.objects.get(photo_id=post_id)
-            user_liked.delete()
-            likes = Photolike.objects.filter(photo__photo_id=post_id).count()
-            try:
-                del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
-            except KeyError:
-                print("keyerror")
-            return HttpResponse(likes, liked)
-        else:
-            likes = 0
-            return HttpResponse(likes, liked)
-    else:
-        print("like")
-        liked = True
-        like_id = ''.join(random.choice(string.digits) for i in range(13))
+   liked = request.GET.get('liked_db')
+   post_id = request.GET.get('post_id')
+   num_likes = request.GET.get('num_likes')
+   # request.session[request.session.get('username') + '_has_liked' + post_id] = False
+   print(request.session.get(request.session.get('username') + '_has_liked' + post_id))
+   print(liked)
+   if request.session.get(request.session.get('username') + '_has_liked' + post_id) is None:
+       if liked == 'True':
+           if int(num_likes) > 0:
+               user_liked = Photolike.objects.get(photo_id=post_id)
+               user_liked.delete()
+               likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+               liked = 'False'
+               # try:
+               #    del request.session[request.session.get('username') + 'has_liked_' + str(post_id)]
+               # except KeyError:
+               #    print("keyerror")
+               data = {'likes': likes, 'liked': liked}
+               return HttpResponse(json.dumps(data))
+           else:
+               liked = 'False'
+               likes = 0
 
-        while(1):
-            if Photolike.objects.filter(like_id=like_id).count()==0:
-                user_obj = UserInfor.objects.get(username=request.session.get('username'))
-                Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
-                break
-            else:
-                like_id = ''.join(random.choice(string.digits) for i in range(13))
+               data = {'likes': likes, 'liked': liked}
+               return HttpResponse(json.dumps(data))
 
-        likes = Photolike.objects.filter(photo__photo_id=post_id).count()
-        return HttpResponse(likes, liked)
+       else:
+           liked = 'True'
+           request.session[request.session.get('username') + '_has_liked' + post_id] = True
+           like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+           while(1):
+               if Photolike.objects.filter(like_id=like_id).count()==0:
+                   user_obj = UserInfor.objects.get(username=request.session.get('username'))
+                   Photolike.objects.create(like_id=like_id, photo_id=post_id, username=user_obj)
+                   break
+               else:
+                   like_id = ''.join(random.choice(string.digits) for i in range(13))
+
+           likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+           data = {'likes': likes, 'liked': liked}
+           return HttpResponse(json.dumps(data))
+
+   if request.session[request.session.get('username') + '_has_liked' + post_id] is True:
+       print('unliked')
+       likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+       if likes > 0:
+           liked = 'False'
+           user_liked = Photolike.objects.get(photo_id=post_id)
+           user_liked.delete()
+           likes = Photolike.objects.filter(photo__photo_id=post_id).count()
+           try:
+               del request.session[request.session.get('username') + '_has_liked' + post_id]
+           except KeyError:
+               print("keyerror")
+           data = {'likes': likes, 'liked': liked}
+           return HttpResponse(json.dumps(data))
+       else:
+           liked = 'False'
+           likes = 0
+           try:
+               del request.session[request.session.get('username') + '_has_liked' + post_id]
+           except KeyError:
+               print("keyerror")
+           data = {'likes': likes, 'liked': liked}
+           return HttpResponse(json.dumps(data))
       
 def saveimage(request):
     name = request.POST.get('image_name')

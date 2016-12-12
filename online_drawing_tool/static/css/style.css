@@ -519,6 +519,10 @@ position: absolute;
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
 }
+.profile_info h3{
+    text-align: left !important;
+    text-shadow: none !important;
+}
 
 .row.row-eq-height {
   display: -webkit-box;

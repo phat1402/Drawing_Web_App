@@ -4,6 +4,7 @@ var drawingApp = (function() {
 
 
 
+
     "use strict";
 
     var
@@ -36,7 +37,6 @@ var drawingApp = (function() {
         undo_button,
         clear_button,
         save_button,
-        imgURL,
         saveInt = 0,
         x0,
         y0,
@@ -46,7 +46,7 @@ var drawingApp = (function() {
         saveImageToServer,
         undoData = [],
         undoImg = new Image(),
-        changeColoringImage = function(imgFile) {
+       changeColoringImage = function(imgFile) {
             for (i = 1; i < undoData.length; i++) {
                 undoData.pop();
             }
@@ -54,11 +54,6 @@ var drawingApp = (function() {
             clearCanvas();
             coloringPic.src = imgFile;
             outlineCreate();
-        },
-
-        saveToServerFunction = function() {
-            document.getElementById("data").value = imgURL;
-            console.log(imgURL);
         },
         cutHex = function(h) {
             return (h.charAt(0) === "#") ? h.substring(1, 7) : h;
@@ -114,13 +109,10 @@ var drawingApp = (function() {
         ev_size_change = function(e) {
             curSize = this.value / 3;
         },
-        drawImg = function() {
-
-        },
         undoAction = function() {
             contexto.clearRect(0, 0, canvasWidth, canvasHeight);
             contexto.drawImage(undoImg, 0, 0, canvasWidth, canvasHeight);
-            imgURL = canvaso.toDataURL("image/png");
+            document.getElementById("data").value = canvaso.toDataURL("image/png");
 
 
             if (undoData.length > 1) {
@@ -302,6 +294,10 @@ var drawingApp = (function() {
                         context.putImageData(colorLayerData, 0, 0);
                         img_update();
 
+                        undoData.push(canvaso.toDataURL("image/png"));
+                        undoImg.src = undoData[undoData.length - 2];
+                        document.getElementById("data").value = canvaso.toDataURL("image/png");
+
                     }
 
                     if (curTool !== "bucket") {
@@ -456,7 +452,7 @@ var drawingApp = (function() {
                         }
                         undoData.push(canvaso.toDataURL("image/png"));
                         undoImg.src = undoData[undoData.length - 2];
-                        imgURL = canvaso.toDataURL("image/png");
+                        document.getElementById("data").value = canvaso.toDataURL("image/png");
 
 
 
@@ -476,7 +472,6 @@ var drawingApp = (function() {
             size_select.addEventListener('click', ev_size_change, false);
             undo_button.addEventListener('click', undoAction, false);
             clear_button.addEventListener('click', clearCanvasO, false);
-            saveToServer.addEventListener('click', saveToServerFunction, false);
 
 
 
@@ -542,7 +537,6 @@ var drawingApp = (function() {
             size_select = document.getElementById("sizeSelector");
             undo_button = document.getElementById("undoButton");
             clear_button = document.getElementById("clearButton");
-            saveToServer = document.getElementById("saveToServer");
 
             context.fillStyle = "#ffffff";
             context.fillRect(0, 0, canvasWidth, canvasHeight);
@@ -567,7 +561,7 @@ var drawingApp = (function() {
             hexToRGB(curHexColor);
             outlineCreate();
             context.drawImage(loadedIMG, drawingAreaX, drawingAreaY, drawingAreaWidth, drawingAreaHeight);
-
+            //console.log(p);
 
 
         };

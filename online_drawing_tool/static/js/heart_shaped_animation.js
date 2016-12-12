@@ -91,24 +91,48 @@ $(document).ready(function () {
             }
         }
     });
+    // $('.post-likes').click(function () {
+    //
+    //     var id, num_likes, liked;
+    //     id = $('.heart-particle-box').attr('data-post-id');
+    //     num_likes = $('#heart-counter').attr('data-num-likes');
+    //     liked = $('.heart-particle-box').attr('data-liked');
+    //     $.ajax({
+    //         type: 'GET',
+    //         url : 'api/like_blog',
+    //         data:{
+    //             post_id:id,
+    //             num_likes:num_likes,
+    //             liked:liked
+    //         },
+    //         success: function(response){
+    //             //$('.like_count_blog').html(response);
+    //             location.reload();
+    //         }
+    //     })
+    // });
+
     $('.post-likes').click(function () {
-        
-        var id, num_likes, liked;
-        id = $('.heart-particle-box').attr('data-post-id');
-        num_likes = $('#heart-counter').attr('data-num-likes');
-        liked = $('.heart-particle-box').attr('data-liked');
-        $.ajax({
-            type: 'GET',
-            url : 'api/like_blog',
-            data:{
-                post_id:id,
-                num_likes:num_likes,
-                liked:liked
-            },
-            success: function(response){
-                //$('.like_count_blog').html(response);
-                location.reload();
-            }
-        })
-    });
+
+           var id, num_likes, liked;
+           id = $('.heart-particle-box').attr('data-post-id');
+           num_likes = $('#heart-counter').attr('data-num-likes');
+           liked = $('.heart-particle-box').attr('data-liked');
+           $.ajax({
+               type: 'GET',
+               url : 'api/like_blog',
+               dataType: 'json',
+               data:{
+                   post_id:id,
+                   num_likes:num_likes,
+                   liked_db:liked
+               },
+               success: function(response){
+                   //alert (response.liked);
+                   $('.like_count_blog').html(response.likes);
+                   $('.heart-particle-box').attr('data-liked',response.liked);
+                   //location.reload();
+               }
+           })
+       });
 });

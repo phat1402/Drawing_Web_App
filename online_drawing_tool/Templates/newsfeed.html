@@ -33,7 +33,7 @@
                 <ul>
                     <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
                     <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
-                    <li><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
+                    <li><a href="{% url 'MyGallery' %}" accesskey="3" title=""> Gallery</a></li>
                     <li class="current_page_item"><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
                     {% if request.session.username %}
                         <li class="dropdown">
@@ -99,152 +99,66 @@
 </div>
         <div class = "container image_container ma-top-30">
             <div id="gallery">
-                <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="{% url 'FriendImageDetail' %}">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/1/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-                <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/2/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/3/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/4/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/2/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/4/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/1/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/3/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/1/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-                <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/2/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/3/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/4/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/2/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/4/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/1/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
-              <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
-                  <a href="#">
-                  <img class="img" src="http://lorempixel.com/800/400/nature/3/" alt="" />
-                    <figcaption>
-                        <h2>Legend</h2>
-                        <p>Lorem ipsum dolor sit amet</p>
-                    </figcaption>
-                    </a>
-                </figure>
+                {% for photo in photo_list %}
+                    <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
+                      <a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} ">
+                      <img src="{{ photo.photo_link }}" height="250px" width="285px" />
+                        <figcaption>
+                            <h2>{{ photo.username.username }}</h2>
+                            <p>{{ photo.photo_name }}</p>
+                        </figcaption>
+                        </a>
+                    </figure>
+                {% endfor %}
             </div>
         </div>
 
+<script>
+    "use strict";
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    $('#logout_link').on('click', function () {
+        $.ajax({
+            method: 'POST',
+            url: '/api/logout',
+            data: {},
+            success: function (data) {
+                location.reload();
+
+            }.bind(this)
+
+        });
+    });
+
+</script>
 </body>
 </html>
