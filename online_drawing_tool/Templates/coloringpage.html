@@ -246,6 +246,19 @@
         }
     });
 
+        $('#logout_link').on('click', function () {
+        $.ajax({
+            method: 'POST',
+            url: '/api/logout',
+            data: {},
+            success: function (data) {
+                location.reload();
+
+            }.bind(this)
+
+        });
+    });
+
     $('#saveToServer').on('click', function () {
         var photo_name = document.getElementById('imageName').value;
         var data = document.getElementById('data').value;

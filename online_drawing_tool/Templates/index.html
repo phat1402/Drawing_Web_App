@@ -32,12 +32,12 @@
         <div id="menu">
             <ul>
                 <li class="current_page_item"><a href="#" accesskey="1" title="">Homepage</a></li>
-                <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
-                <li><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
-                <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
+                <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="" onclick="return stopUser()">Coloring Book</a></li>
+                <li><a href="{% url 'MyGallery' %}" accesskey="3" title="" onclick="return stopUser()">My Gallery</a></li>
+                <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="" onclick="return stopUser()">Newsfeed</a></li>
                 {% if request.session.username %}
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }}</a>
+                        <a id = "username1" href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }}</a>
                         <ul id="loggedin-dp" class="dropdown-menu">
                             <li><a href="#">My Account</a></li>
                             <li><a href="#" id="logout_link">Logout</a></li>
@@ -339,7 +339,7 @@
             <div class="modal-body">
                 <input id="imageName" type="text" placeholder="Input your photo name" class="ma-bot-10">
                 <input id="data" type="hidden" value="" name="imgurl"/>
-                <input id="saveToServer" type="submit" value="Submit" class="saveForm">
+                <input id="saveToServer" type="submit" value="Submit" class="saveForm" onclick="return stopUser()">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -448,8 +448,21 @@
         });
     });
 
+
 </script>
 
+<script type="text/javascript">
+
+            function stopUser(){
+            var username = $('#username1').val();
+            if (typeof (username) === "undefined"){
+                alert("Need to login to use feature");
+                return false;
+            }
+            else
+                return true;
+            }
+</script>
 <script type="text/javascript">
     drawingApp.init('{% static 'DrawingTool/images/emptyPicture.png' %}', '{% static 'DrawingTool/images/emptyPicture.png' %}');
 </script>

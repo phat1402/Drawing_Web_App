@@ -101,8 +101,7 @@
                 <div class="col-md-4 profile" style="background-color: white">
                     <div class="profile-pic">
 				        <img src="{% static 'img/profile_pic.jpg' %}">
-				        <h2>Aisha</h2>
-				        <p>abc </p>
+				        <h2>{{ username }}</h2>
                         <div class="input-group">
                             <input type="text" class="form-control searchbox" placeholder="Search for image...">
                             <span class="input-group-btn">
@@ -126,12 +125,67 @@
                                 <a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} ">
                                     <img class="thumbnail img-responsive" src="{{ photo.photo_link }}">
                                 </a>
+{#                                <button class = "btn-default btn" type="button" style="margin-top: 10px">#}
+{#                                    Edit Profile#}
+{#                                </button>#}
+{#                                 <button class = "btn-default btn" type="button" style="margin-top: 10px">#}
+{#                                    Edit Profile#}
+{#                                </button>#}
                             </div>
                         {% endfor %}
                     </div>
                 </div>
             </div>
         </div>
+
+<script>
+    "use strict";
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    var csrftoken = getCookie('csrftoken');
+
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
+            }
+        }
+    });
+
+
+    $('#logout_link').on('click', function () {
+        $.ajax({
+            method: 'POST',
+            url: '/api/logout',
+            data: {},
+            success: function (data) {
+                location.reload();
+
+            }.bind(this)
+
+        });
+    });
+
+
+</script>
 
 </body>
 </html>
