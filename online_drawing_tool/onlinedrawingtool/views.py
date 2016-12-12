@@ -22,8 +22,10 @@ class MyGallery(generic.TemplateView):
     def get(self, request, *args, **kwargs):
         print(request.session.get('username'))
         photos = Photo.objects.filter(username=request.session.get('username'))
+        number_of_photos = photos.count()
         kwargs['photos'] = photos
         kwargs['username'] = request.session.get('username')
+        kwargs['numberofphoto'] = number_of_photos
         return super(MyGallery, self).get(request, *args, **kwargs)
 
 class ColoringPage(generic.TemplateView):
