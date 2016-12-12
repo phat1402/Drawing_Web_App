@@ -17,7 +17,99 @@ import base64
 import os
 import time
 from os.path import dirname, join, exists
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.core.mail import send_mail
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
+from django.contrib import messages
+from django.template import loader
+from django.db.models.query_utils import Q
 
+
+
+class ResetPasswordRequestView(generic.View):
+
+    @staticmethod
+    def validate_email_address(email):
+        '''
+        This method here validates the if the input is an email address or not. Its return type is boolean, True if the input is a email address or False if its not.
+        '''
+        try:
+            validate_email(email)
+            return True
+        except ValidationError:
+            return False
+
+    def post(self, request, *args, **kwargs):
+        '''
+        A normal post request which takes input from field "email_or_username" (in ResetPasswordRequestForm).
+        '''
+        #form = self.form_class(request.POST)
+        email_username = request.POST.get('email_username')
+        data = {}
+        #if form.is_valid():
+        #    data = form.cleaned_data["email_or_username"]
+        if self.validate_email_address(email_username) is True:  # uses the method written above
+            associated_users = UserInfor.objects.filter(Q(email=email_username) | Q(username=email_username))
+            if associated_users.exists():
+                for user in associated_users:
+                    c = {
+                        'email': user.email,
+                        'domain': request.META['HTTP_HOST'],
+                        'site_name': "Online Drawing Tool Skyss's",
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'user': user,
+                        'protocol': 'http',
+                    }
+                    subject_template_name = 'Subject.txt'
+                # copied from django/contrib/admin/templates/registration/password_reset_subject.txt to templates directory
+                    email_template_name = 'passwordresetemail.html'
+                # copied from django/contrib/admin/templates/registration/password_reset_email.html to templates directory
+                    subject = loader.render_to_string(subject_template_name, c)
+                # Email subject *must not* contain newlines
+                    subject = ''.join(subject.splitlines())
+                    email = loader.render_to_string(email_template_name, c)
+                    send_mail(subject, email, 'baileyvstheworld@gmail.com', [user.email], fail_silently=False)
+                data = {'result':'success','message':'An email has been sent to ' + email_username + ". Please check its inbox."}
+                #messages.success(request, 'An email has been sent to ' + data + ". Please check its inbox to continue reseting password.")
+                return HttpResponse(json.dumps(data))
+            data = {'result': 'failed',
+                    'message': 'No user is associated with this email address'}
+            #result = self.form_invalid(form)
+            #messages.error(request, 'No user is associated with this email address')
+            return HttpResponse(json.dumps(data))
+        else:
+            associated_users = UserInfor.objects.filter(username=email_username)
+            if associated_users.exists():
+                for user in associated_users:
+                    c = {
+                        'email': user.email,
+                        'domain': "Online Drawing Tool Skyss's",  # or your domain
+                        'site_name': "Online Drawing Tool Skyss's",
+                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                        'user': user,
+                        'protocol': 'http',
+                    }
+                    subject_template_name = 'registration/password_reset_subject.txt'
+                    email_template_name = 'registration/password_reset_email.html'
+                    subject = loader.render_to_string(subject_template_name, c)
+                    # Email subject *must not* contain newlines
+                    subject = ''.join(subject.splitlines())
+                    email = loader.render_to_string(email_template_name, c)
+                    send_mail(subject, email, 'baileyvstheworld@gmail.com', [user.email], fail_silently=False)
+                data = {'result': 'success',
+                        'message': 'An email has been sent to ' + email_username + ". Please check its inbox."}
+                #result = self.form_valid(form)
+                #messages.success(request, 'Email has been sent to ' + data + "'s email address. Please check its inbox to continue reseting password.")
+                return HttpResponse(json.dumps(data))
+            #result = self.form_invalid(form)
+            #messages.error(request, 'This username does not exist in the system.')
+            data = {'result': 'failed',
+                    'message': 'No user is associated with this email address'}
+            return HttpResponse(json.dumps(data))
+        #messages.error(request, 'Invalid Input')
+        #return self.form_invalid(form)
 class SendLoginAPI(CsrfExemptMixin,JsonRequestResponseMixin, generic.View):
 
     def post(self, request, *args, **kwargs):

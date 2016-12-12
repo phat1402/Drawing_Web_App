@@ -65,8 +65,9 @@
                                         </div>
                                         <div class="form-group">
                                             <div class="message" style="color:white"></div>
-                                            <div class="help-block text-right"><a id="forget_password" href="">Forget
-                                                the
+                                            <div class="help-block text-right"><a id="forget_password"
+                                                                                  href="#resetmodal"
+                                                                                  data-toggle="modal">Forget the
                                                 password ?</a>
                                             </div>
                                         </div>
@@ -85,7 +86,7 @@
                                     </div>
                                 </div>
                                 <div class="bottom text-center">
-                                    New here ? <a href="#" data-toggle="modal" data-target="#bannerformmodal"><b>Join
+                                    New here ? <a href="#bannerformmodal" data-toggle="modal"><b>Join
                                     Us</b></a>
                                 </div>
                             </div>
@@ -108,7 +109,41 @@
 <div id="drawingapp">
 
 
-    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog" aria-labelledby="bannerformmodal"
+    <div class="modal fade resetmodal" tabindex="-1" role="dialog" aria-labelledby="resetmodal"
+         aria-hidden="true" id="resetmodal" style="z-index:6500">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content" style="background-color: #333">
+                <div class="modal-header" style="color:#fff;border-bottom: none;text-align: center">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Reset Password</h4>
+                </div>
+                <hr class="colorgraph">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-sign-in"></i></span>
+                            {% csrf_token %}
+                            <input id="email_username" type="text" class="form-control" placeholder="Email or username"
+                                   name="email_username"/>
+                        </div>
+                        <div class="notify" style="color:white;padding-left:50px"></div>
+                    </div>
+                </div>
+                <hr class="colorgraph">
+                <div class="modal-footer" style="color:#fff;border-top: none;text-align:center;">
+                    <button id="send_reset" class="btn btn-primary btn-lg" style="background-image: linear-gradient(to bottom,#f3ac06 0,#e2700c 100%);border-color: orange">
+                    Reset
+                </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade bannerformmodal" tabindex="-1" role="dialog"
+         aria-labelledby="bannerformmodal"
          aria-hidden="true" id="bannerformmodal" style="z-index:5500">
         <div class="modal-dialog modal-sm">
             <div class="modal-content" style="background-color: #333">
@@ -134,7 +169,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input id="first_name" type="text" class="form-control" placeholder="First Name"
+                                    <input id="first_name" type="text" class="form-control"
+                                           placeholder="First Name"
                                            name="first_name"/>
                                 </div>
                             </div>
@@ -143,7 +179,8 @@
                             <div class="form-group">
                                 <div class="input-group">
                                     <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                                    <input id="last_name" type="text" class="form-control" placeholder="Last Name"
+                                    <input id="last_name" type="text" class="form-control"
+                                           placeholder="Last Name"
                                            name="last_name"/>
                                 </div>
                             </div>
@@ -154,7 +191,8 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                                                    <span class="input-group-addon"><i
+                                                            class="fa fa-venus-mars"></i></span>
                                     <select class="form-control" id="gender" name="gender">
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
@@ -166,7 +204,8 @@
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa-birthday-cake"></i></span>
+                                                    <span class="input-group-addon"><i
+                                                            class="fa-birthday-cake"></i></span>
                                     <input id="date_of_birth" type="text" class="form-control"
                                            placeholder="Date of Birth"
                                            name="date_of_birth"/>
@@ -178,7 +217,8 @@
                     <div class="form-group">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                            <input id="emailregister" type="email" class="form-control" placeholder="Email"
+                            <input id="emailregister" type="email" class="form-control"
+                                   placeholder="Email"
                                    name="emailregister"/>
                         </div>
                         <div class="err_message_2" style="color:white;padding-left:50px"
@@ -257,7 +297,8 @@
 </div>
 
 <div id="tool" title="Toggle Tool" width="16" height="16">
-    <img id="toolImage" src="{% static 'DrawingTool/images/brush.png' %}" alt="Toggle Tool" width="50" height="50"/>
+    <img id="toolImage" src="{% static 'DrawingTool/images/brush.png' %}" alt="Toggle Tool" width="50"
+         height="50"/>
 </div>
 
 <div id="sizeDiv" background-color="#ffffff">
@@ -265,16 +306,19 @@
 </div>
 
 <div id="undoDiv" background-color="#ffffff">
-    <img src="{% static 'DrawingTool/images/undo.png' %}" alt="input" name="undoButton" id="undoButton"></img>
+    <img src="{% static 'DrawingTool/images/undo.png' %}" alt="input" name="undoButton"
+         id="undoButton"></img>
 </div>
 
 <div id="clearDiv" background-color="#ffffff">
-    <img src="{% static 'DrawingTool/images/clear.png' %}" alt="input" name="clearButton" id="clearButton"></img>
+    <img src="{% static 'DrawingTool/images/clear.png' %}" alt="input" name="clearButton"
+         id="clearButton"></img>
 </div>
 
 
 <div id="saveDiv">
-    <img id="saveToServerButton" src="{% static 'DrawingTool/images/save.png' %}" alt="submit" data-toggle="modal"
+    <img id="saveToServerButton" src="{% static 'DrawingTool/images/save.png' %}" alt="submit"
+         data-toggle="modal"
          data-target="#myModal"></img>
 </div>
 
@@ -359,6 +403,26 @@
             success: function (data) {
                 location.reload();
 
+            }.bind(this)
+
+        });
+    });
+
+
+    $('#send_reset').on('click', function () {
+        var email_username = document.getElementById('email_username').value;
+        $.ajax({
+            method: 'POST',
+            url: '/api/resetForm',
+            dataType: 'json',
+            data: {
+                 'email_username': email_username,
+            },
+            success: function (data) {
+                if (data.result == "failed")
+                    $(".notify").html('<p>' + data.message + '</p>');
+                if (data.result == "success")
+                    $(".notify").html('<p>' + data.message + '</p>');
             }.bind(this)
 
         });

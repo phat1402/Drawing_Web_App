@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'onlinedrawingtool',
         'USER': 'root',
-        'PASSWORD': 'phat1402',
+        'PASSWORD': 'krystalandmike1',
         'HOST': 'localhost',
         'PORT': '3306'
     }
@@ -143,3 +143,10 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "baileyvstheworld@gmail.com"
+EMAIL_HOST_PASSWORD = "krystalandmike"
+EMAIL_USE_TLS = True
