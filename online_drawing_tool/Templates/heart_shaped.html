@@ -2,7 +2,6 @@
 <head>
     <link href="{% static 'css/heart_shaped_animation.css' %}" rel="stylesheet" type="text/css" media="all" />
 </head>
-{% csrf_token %}
 <div class="heart-particle-box" data-post-id="{{ post }} " data-liked = '{{ liked }}'>
     <button class="likes post-likes" id="heart-icon">
         {% if liked %}

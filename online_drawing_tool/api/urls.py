@@ -11,6 +11,5 @@ urlpatterns = [
     url(r'^search$',  views.search_titles, name="ajax_search_view"),
     url(r'^logout$', views.log_out),
     url(r'^like_blog$', views.like_ajax, name='like'),
-    url(r'^saveimage$', views.saveimage),
-
+    url(r'^saveimage$',views.saveimage),
 ]
