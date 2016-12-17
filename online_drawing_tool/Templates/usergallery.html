@@ -103,8 +103,6 @@
 				        <img src="{% static 'img/profile_pic.jpg' %}">
 				        <h2>{{ username }}</h2>
                         <div class="input-group">
-                            <input type="text" id="search" name="search" placeholder="search" class = "searchbox"/> 
-                            <ul id="search_results"></ul>
                         </div>
                         <div class = "profile_info">
                             <ul>
@@ -122,9 +120,12 @@
                                 </li>
                             </ul>
                         </div>
-                        <button class = "btn-default btn" type="button" style="margin-top: 10px">
-                           Edit Profile
-                        </button>
+                        <div id="result">
+
+                        </div>
+{#                        <button class = "btn-default btn" type="button" style="margin-top: 10px">#}
+{#                           Edit Profile#}
+{#                        </button>#}
 			        </div>
                 </div>
                 <div class="col-md-8">
@@ -195,7 +196,37 @@
 
 
 </script>
-<script src ="{% static 'js/ajax_search.js' %}"></script>
-<script src ="{% static 'js/session_follow.js' %}"></script>
+    <script src="/static/js/user_follow.js"></script>
+
+    <script>
+        function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+        $('#follow_btn').click(function () {
+            var u = getParameterByName('u');
+            var val = $(this).val();
+            $.ajax({
+           type: 'GET',
+           url : 'api/follow_action',
+           data: {
+               'u': u.toString(),
+               'val' : val.toString()
+           },
+           success: function(response){
+               //val.val(response.case)
+                location.reload()
+           }
+       })
+        });
+    </script>
+
 </body>
 </html>

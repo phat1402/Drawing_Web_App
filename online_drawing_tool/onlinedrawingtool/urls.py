@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomePage.as_view(), name='HomePage'),
+    url(r'^landing$', views.HomePage.as_view(), name='LandingPage'),
     url(r'^mygallery', views.MyGallery.as_view(), name='MyGallery'),
     url(r'^image_detail(?P<photo_id>[\w-]+)$', views.ImageDetail.as_view(), name='ImageDetail'),
     url(r'^gallery_item(?P<photo_id>[\w-]+)$', views.GalleryImageDetail.as_view(), name='GalleryImageDetail'),
@@ -28,5 +29,7 @@ urlpatterns = [
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^friend_image_detail', views.FriendImageDetail.as_view(), name='FriendImageDetail'),
     url(r'^api/', include(api.urls, namespace='api')),
+    url(r'^usergallery',views.UserGallery.as_view(),name='UserGallery'),
+    url(r'^pagenotfound',views.PageNotFound.as_view(),name='PageNotFound'),
 ]
 

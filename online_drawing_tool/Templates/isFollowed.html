@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script>
+        function getParameterByName(name, url) {
+    if (!url) {
+      url = window.location.href;
+    }
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+        $('#follow_btn').click(function () {
+            var u = getParameterByName('u');
+            var val = $(this).val();
+            $.ajax({
+           type: 'GET',
+           url : 'api/follow_action',
+           data: {
+               'u': u.toString(),
+               'val' : val.toString()
+           },
+           success: function(response){
+               //val.val(response.case)
+                location.reload()
+           }
+       })
+    });
+    </script>
+</head>
+<body><div id="temp">
+       {% if stat == 1 %}
+           <button class = "btn-default btn" value = "Unfollow" id="follow_btn" type="button" style="margin-top: 10px">
+                           Unfollow
+                        </button>
+                        {% endif %}
+                        {% if stat == 0 %}
+           <button class = "btn-default btn" value = "Follow" id="follow_btn" type="button" style="margin-top: 10px">
+                           Follow
+                        </button>
+                        {% endif %}
+                        {% if stat == 2 %}
+                            <script type="text/javascript">
+                             window.location.replace('mygallery');
+                             </script>
+                         {% endif %}
+                         {% if stat == 3 %}
+                            <script type="text/javascript">
+                             window.location.replace('landing');
+                             setTimeout(alert('Please Login before search!'),2000);
+
+                             </script>
+{#Redirect to Mygallery#}
+                        {% endif %}
+                        {% if stat == 404 %}
+{# Redirect to 404 #}   <script type="text/javascript">
+                             window.location.replace('pagenotfound');
+                             </script>
+                        {% endif %}
+</div>
+</body>
+</html>

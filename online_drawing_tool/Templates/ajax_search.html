@@ -6,7 +6,10 @@
             {% endfor %}
         {% elif select == 'user' %}
             {% for result in results %}
-                <li>{{ result.username }}</li>
+                <li>
+                 {{ result.username }}
+{#                 <a  href="{% url 'UserGallery'%}" {% result.username %} ">{{ result.username }}</a>#}
+                </li>
             {% endfor %}
         {% endif %}
     {% elif results == '' %}
