@@ -136,8 +136,8 @@
                                 </a>
                                 <div style="float: right;margin-bottom: 10px;">
                                     <p id="photoid" style="display: none" data-photo-id = '{{ photo.photo_id }}'></p>
-                                    <a href="#" id="deleteImage{{ photo.photo_id }}" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>
-                                    <img src="{% static 'img/edit.png' %}" width="20" height="20">
+                                    <a href="#" id="deleteImage{{ photo.photo_id }}" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>    
+                                    <a href="{% url 'EditImage' photo.photo_id %}"><img src="{% static 'img/edit.png' %}" width="20" height="20"> </a>
                                 </div>
                             </div>
                             <script>

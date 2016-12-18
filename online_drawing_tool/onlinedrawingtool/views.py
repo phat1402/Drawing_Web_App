@@ -99,6 +99,16 @@ class GalleryImageDetail(generic.TemplateView):
 
         return super(GalleryImageDetail, self).get(request, *args, **kwargs)
 
+class EditImage(generic.TemplateView):
+    template_name = 'edit_image.html'
+
+    def get(self, request, *args, **kwargs):
+        photo = get_object_or_404(Photo, photo_id = kwargs['photo_id'])
+        kwargs['photo_link_db'] = photo.photo_link
+        kwargs['photo_name_db'] = photo.photo_name
+        kwargs['photo_id'] = photo.pk
+        return super(EditImage, self).get(request, *args, **kwargs)
+
 class NewsFeed(generic.TemplateView):
     template_name = 'newsfeed.html'
 
