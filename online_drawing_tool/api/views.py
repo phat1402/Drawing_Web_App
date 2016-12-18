@@ -349,6 +349,27 @@ def saveimage(request):
 
     return HttpResponse(message)
 
+def save_edited_image(request):
+    name = request.POST.get('image_name')
+    data_base64 = request.POST.get('data_base64')
+    photo_id = request.POST.get('photo_id')
+    image_name = name + '.png'
+    imgData = data_base64.split(',')[1]
+
+    # Generate Path
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # THIS DIRECTORY DEPENDS ON OS
+    USERPHOTO_DIRS = join(BASE_DIR, 'static/user_photo/')
+    REAL_DIR = USERPHOTO_DIRS + image_name
+    message = 'Save Image Successfully'
+    with open(REAL_DIR, "wb") as fh:
+        fh.write(base64.decodestring(imgData))
+
+    # Add Infor to database
+    photo_link = '/static/user_photo/' + image_name
+    Photo.objects.filter(photo_id=photo_id).update(photo_link=photo_link)
+
+    return HttpResponse(message)
+
 def comment(request):
     comment_db = request.GET.get('comment_text')
     photo_id_text = request.GET.get('photo_id')
