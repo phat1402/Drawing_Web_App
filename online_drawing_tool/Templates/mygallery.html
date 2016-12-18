@@ -22,80 +22,80 @@
 
 </head>
 <body>
-<div id="header-wrapper">
-    {% csrf_token %}
-        <div id="header" class="container">
-            <div id="logo">
-                <span><img src="{% static 'img/brush.svg' %}"></span>
-                <h1><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
-            </div>
-            <div id="menu">
-                <ul>
-                    <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
-                    <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
-                    <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
-                    <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
-                    {% if request.session.username %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }}</a>
-                            <ul id="loggedin-dp" class="dropdown-menu">
-                                <li><a href="#">My Account</a></li>
-                                <li><a href="#" id="logout_link">Logout</a></li>
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login &#9660;</a>
-                            <div id="login-dp" class="dropdown-menu">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div id="login">
-                                            <!--  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
-                                                    id="login-nav">-->
-                                            <div class="form-group">
-                                                <label class="sr-only" for="email">Email address</label>
-                                                <input type="email" class="form-control" id="email"
-                                                       placeholder="Email address" required="">
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="sr-only" for="pass">Password</label>
-                                                <input type="password" class="form-control" id="pass"
-                                                       placeholder="Password" required="">
-
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="message" style="color:white"></div>
-                                                <div class="help-block text-right"><a id="forget_password" href="">Forget
-                                                    the
-                                                    password ?</a>
+    <div id="header-wrapper">
+        {% csrf_token %}
+            <div id="header" class="container">
+                <div id="logo">
+                    <span><img src="{% static 'img/brush.svg' %}"></span>
+                    <h1><a href="{% url 'HomePage' %}">Online Drawing Tool</a></h1>
+                </div>
+                <div id="menu">
+                    <ul>
+                        <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
+                        <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
+                        <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
+                        <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
+                        {% if request.session.username %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.session.username }}</a>
+                                <ul id="loggedin-dp" class="dropdown-menu">
+                                    <li><a href="#">My Account</a></li>
+                                    <li><a href="#" id="logout_link">Logout</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Login &#9660;</a>
+                                <div id="login-dp" class="dropdown-menu">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div id="login">
+                                                <!--  <form class="form" role="form" method="post" action="login" accept-charset="UTF-8"
+                                                        id="login-nav">-->
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="email">Email address</label>
+                                                    <input type="email" class="form-control" id="email"
+                                                           placeholder="Email address" required="">
                                                 </div>
+                                                <div class="form-group">
+                                                    <label class="sr-only" for="pass">Password</label>
+                                                    <input type="password" class="form-control" id="pass"
+                                                           placeholder="Password" required="">
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="message" style="color:white"></div>
+                                                    <div class="help-block text-right"><a id="forget_password" href="">Forget
+                                                        the
+                                                        password ?</a>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button id="send_login" class="btn btn-primary btn-lg "
+                                                            style="background-image: linear-gradient(to bottom,#f3ac06 0,#e2700c 100%);">
+                                                        Sign in
+                                                    </button>
+                                                </div>
+                                                <!--<div class="checkbox1">
+                                                    <label>
+                                                        <input type="checkbox" id="remember_me"> keep me logged-in
+                                                    </label>
+                                                </div>-->
+                                                <!--   </form> -->
                                             </div>
-                                            <div class="form-group">
-                                                <button id="send_login" class="btn btn-primary btn-lg "
-                                                        style="background-image: linear-gradient(to bottom,#f3ac06 0,#e2700c 100%);">
-                                                    Sign in
-                                                </button>
-                                            </div>
-                                            <!--<div class="checkbox1">
-                                                <label>
-                                                    <input type="checkbox" id="remember_me"> keep me logged-in
-                                                </label>
-                                            </div>-->
-                                            <!--   </form> -->
+                                        </div>
+                                        <div class="bottom text-center">
+                                            New here ? <a href="#" id="register_form"><b>Join Us</b></a>
                                         </div>
                                     </div>
-                                    <div class="bottom text-center">
-                                        New here ? <a href="#" id="register_form"><b>Join Us</b></a>
-                                    </div>
                                 </div>
-                            </div>
-                        </li>
-                    {% endif %}
-                </ul>
+                            </li>
+                        {% endif %}
+                    </ul>
 
+                </div>
             </div>
-        </div>
-</div>
+    </div>
         <div class = "container">
             <div class="row ma-top-30 ma-bot-30 row-eq-height">
                 <div class="col-md-4 profile" style="background-color: white">
@@ -107,9 +107,20 @@
                             <ul id="search_results"></ul>
                         </div>
                         <div class = "profile_info">
-                            <h3> {{ numberofphoto }} Posts </h3>
-                            <h3> 100 Followers </h3>
-                            <h3> 102 Following </h3>
+                            <ul>
+                                <li>
+                                    <img src="{% static 'img/post.png' %}" class="profile-icon">
+                                    <h3 style="display: inline-block"> {{ numberofphoto }} Posts </h3>
+                                </li>
+                                <li>
+                                    <img src="{% static 'img/follower.png' %}" class="profile-icon">
+                                    <h3 style="display: inline-block"> 100 Followers </h3>
+                                </li>
+                                <li>
+                                    <img src="{% static 'img/following.png' %}" class="profile-icon">
+                                    <h3 style="display: inline-block"> 102 Following </h3>
+                                </li>
+                            </ul>
                         </div>
                         <button class = "btn-default btn" type="button" style="margin-top: 10px">
                            Edit Profile
@@ -121,14 +132,13 @@
                         {% for photo in photos %}
                             <div class="col-lg-3 col-sm-4 col-xs-6 ">
                                 <a title="Image 1" href="{% url 'GalleryImageDetail' photo.photo_id %} ">
-                                    <img class="thumbnail img-responsive" src="{{ photo.photo_link }}">
+                                    <img class="thumbnail img-responsive" src="{{ photo.photo_link }}" style="margin-bottom: 10px !important;">
                                 </a>
-{#                                <button class = "btn-default btn" type="button" style="margin-top: 10px">#}
-{#                                    Edit Profile#}
-{#                                </button>#}
-{#                                 <button class = "btn-default btn" type="button" style="margin-top: 10px">#}
-{#                                    Edit Profile#}
-{#                                </button>#}
+                                <div style="float: right;margin-bottom: 10px;">
+                                    <p id="photoid" style="display: none">{{ photo.photo_id }}</p>
+                                    <a href="#" id="deleteImage" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>
+                                    <img src="{% static 'img/edit.png' %}" width="20" height="20">
+                                </div>
                             </div>
                         {% endfor %}
                     </div>
@@ -173,7 +183,8 @@
         $.ajax({
             method: 'POST',
             url: '/api/logout',
-            data: {},
+            data: {
+            },
             success: function (data) {
                 location.reload();
 
@@ -182,8 +193,27 @@
         });
     });
 
+    $('#deleteImage').on('click', function () {
+        var photo_id = document.getElementById('photoid').value;
+        alert(photo_id);
+
+        $.ajax({
+            method: 'POST',
+            url: '/api/deleteimage',
+            data: {
+                image_id: photo_id
+            },
+            success: function (data) {
+                location.reload();
+                alert(data)
+            }.bind(this)
+
+        });
+    });
+
 
 </script>
-<script src ='{% static 'js/ajax_search.js' %}'></script>
+<script src ="{% static 'js/ajax_search.js' %}"> </script>
+
 </body>
 </html>

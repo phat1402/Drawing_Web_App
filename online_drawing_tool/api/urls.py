@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^logout$', views.log_out),
     url(r'^like_blog$', views.like_ajax, name='like'),
     url(r'^saveimage$',views.saveimage),
-    url(r'^resetForm$', views.ResetPasswordRequestView.as_view()),
-    url(r'^comment$', views.comment, name='comment')
+    url(r'^comment$', views.comment, name='comment'),
+    url(r'^deleteimage$',views.deleteimage),
+    url(r'^resetForm$', views.ResetPasswordRequestView.as_view())
 ]

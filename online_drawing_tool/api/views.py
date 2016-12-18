@@ -2,8 +2,9 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor, Photo, UserGallery, Photolike, Comment
+from api.models import UserInfor,Photo,UserGallery,Photolike, Comment
 from django.http import HttpResponse
+import json as simplejson
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
@@ -348,7 +349,6 @@ def saveimage(request):
 
     return HttpResponse(message)
 
-
 def comment(request):
     comment_db = request.GET.get('comment_text')
     photo_id_text = request.GET.get('photo_id')
@@ -365,3 +365,15 @@ def comment(request):
             # comment_input_db = request.session.get('username') + '-' + comment_id_text
     data = {'user_has_commented': request.session.get('username'), 'comment_input': comment_db}
     return HttpResponse(json.dumps(data))
+
+def deleteimage(request):
+
+    id = request.POST.get('image_id')
+    photo_obj = Photo.objects.get(photo_id=id)
+    Photolike.objects.filter(photo=photo_obj).delete()
+    Comment.objects.filter(photo=photo_obj).delete()
+    Photo.objects.filter(photo_id=id).delete()
+
+    message = 'Delete Image Successfully'
+
+    return HttpResponse(message)
