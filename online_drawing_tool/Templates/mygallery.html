@@ -131,15 +131,32 @@
                     <div  class="row ">
                         {% for photo in photos %}
                             <div class="col-lg-3 col-sm-4 col-xs-6 ">
-                                <a title="Image 1" href="{% url 'GalleryImageDetail' photo.photo_id %} ">
+                                <a title="Image 1" id ='image' href="{% url 'GalleryImageDetail' photo.photo_id %} ">
                                     <img class="thumbnail img-responsive" src="{{ photo.photo_link }}" style="margin-bottom: 10px !important;">
                                 </a>
                                 <div style="float: right;margin-bottom: 10px;">
-                                    <p id="photoid" style="display: none">{{ photo.photo_id }}</p>
-                                    <a href="#" id="deleteImage" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>
+                                    <p id="photoid" style="display: none" data-photo-id = '{{ photo.photo_id }}'></p>
+                                    <a href="#" id="deleteImage{{ photo.photo_id }}" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>    
                                     <a href="{% url 'EditImage' photo.photo_id %}"><img src="{% static 'img/edit.png' %}" width="20" height="20"> </a>
                                 </div>
                             </div>
+                            <script>
+                                $('#deleteImage{{ photo.photo_id }}').on('click', function () {
+
+                                    $.ajax({
+                                        method: 'POST',
+                                        url: '/api/deleteimage',
+                                        data: {
+                                            image_id: '{{ photo.photo_id }}'
+                                        },
+                                        success: function (data) {
+                                            location.reload();
+                                            alert(data)
+                                        }.bind(this)
+
+                                    });
+                                });
+                            </script>
                         {% endfor %}
                     </div>
                 </div>
@@ -193,23 +210,7 @@
         });
     });
 
-    $('#deleteImage').on('click', function () {
-        var photo_id = document.getElementById('photoid').value;
-        alert(photo_id);
 
-        $.ajax({
-            method: 'POST',
-            url: '/api/deleteimage',
-            data: {
-                image_id: photo_id
-            },
-            success: function (data) {
-                location.reload();
-                alert(data)
-            }.bind(this)
-
-        });
-    });
 
 
 </script>
