@@ -2,7 +2,7 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo,UserGallery,Photolike
+from api.models import UserInfor,Photo,UserGallery,Photolike, Comment
 from django.http import HttpResponse
 import json as simplejson
 from django.shortcuts import render_to_response
@@ -359,4 +359,17 @@ def saveimage(request):
     print 'Generate Database'
 
     return HttpResponse(message)
+
+def deleteimage(request):
+
+    id = request.POST.get('image_id')
+    photo_obj = Photo.objects.get(photo_id=id)
+    Photolike.objects.filter(photo=photo_obj).delete()
+    Comment.objects.filter(photo=photo_obj).delete()
+    Photo.objects.filter(photo_id=id).delete()
+
+    message = 'Delete Image Successfully'
+
+    return HttpResponse(message)
+
 
