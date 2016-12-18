@@ -435,7 +435,7 @@
             url: '/api/save_edited_image',
             data: {
                 image_name: photo_name,
-                photo_id: {{ photo_id }},
+                photo_id: '{{ photo_id }}',
                 data_base64: data
             },
             success: function (data) {
