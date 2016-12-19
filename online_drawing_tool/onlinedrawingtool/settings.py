@@ -17,8 +17,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CUR_DIR = dirname(dirname(dirname(__file__)))
 STATICFILES_DIRS = [join(BASE_DIR, 'static')]
 
-# MEDIA_ROOT = join(CUR_DIR, 'media')
-# MEDIA_URL = "/media/"
+MEDIA_ROOT = join(BASE_DIR, 'Media')
+MEDIA_URL = "/media/"
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -91,7 +91,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'onlinedrawingtool',
         'USER': 'root',
-        'PASSWORD': 'phat1402',
+        'PASSWORD': 'krystalandmike1',
         'HOST': 'localhost',
         'PORT': '3306'
     }
