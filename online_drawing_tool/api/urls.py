@@ -20,4 +20,7 @@ urlpatterns = [
     url(r'^getfollowing$',views.getFollowing),
     url(r'^sessfollower$',views.sessFollower),
     url(r'^sessfollowing$',views.sessFollowing),
+    url(r'^save_edited_image$',views.save_edited_image),
+    url(r'^comment$', views.comment, name='comment'),
+    url(r'^deleteimage$',views.deleteimage),
 ]

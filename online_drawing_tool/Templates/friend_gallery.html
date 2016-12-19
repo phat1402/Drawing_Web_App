@@ -33,7 +33,7 @@
                     <ul>
                         <li><a href="{% url 'HomePage' %}" accesskey="1" title="">Homepage</a></li>
                         <li><a href="{% url 'ColoringPage' %}" accesskey="2" title="">Coloring Book</a></li>
-                        <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">My Gallery</a></li>
+                        <li class="current_page_item"><a href="{% url 'MyGallery' %}" accesskey="3" title="">{{ username }} Gallery</a></li>
                         <li><a href="{% url 'NewsFeed' %}" accesskey="4" title="">Newsfeed</a></li>
                         {% if request.session.username %}
                             <li class="dropdown">
@@ -114,17 +114,14 @@
                                 </li>
                                 <li>
                                     <img src="{% static 'img/follower.png' %}" class="profile-icon">
-                                    <h3 id="follower-count" style="display: inline-block"></h3>
+                                    <h3 style="display: inline-block"> 100 Followers </h3>
                                 </li>
                                 <li>
                                     <img src="{% static 'img/following.png' %}" class="profile-icon">
-                                    <h3 id="following-count" style="display: inline-block"></h3>
+                                    <h3 style="display: inline-block"> 102 Following </h3>
                                 </li>
                             </ul>
                         </div>
-                        <button class = "btn-default btn" type="button" style="margin-top: 10px">
-                           Edit Profile
-                        </button>
 			        </div>
                 </div>
                 <div class="col-md-8">
@@ -134,11 +131,6 @@
                                 <a title="Image 1" id ='image' href="{% url 'GalleryImageDetail' photo.photo_id %} ">
                                     <img class="thumbnail img-responsive" src="{{ photo.photo_link }}" style="margin-bottom: 10px !important;">
                                 </a>
-                                <div style="float: right;margin-bottom: 10px;">
-                                    <p id="photoid" style="display: none" data-photo-id = '{{ photo.photo_id }}'></p>
-                                    <a href="#" id="deleteImage{{ photo.photo_id }}" ><img src="{% static 'img/delete.png' %}" width="20" height="20" style="margin-right: 10px"></a>    
-                                    <a href="{% url 'EditImage' photo.photo_id %}"><img src="{% static 'img/edit.png' %}" width="20" height="20"> </a>
-                                </div>
                             </div>
                             <script>
                                 $('#deleteImage{{ photo.photo_id }}').on('click', function () {
@@ -214,8 +206,7 @@
 
 
 </script>
-<script src ="{% static 'js/ajax_search.js' %}"></script>
-<script src ="{% static 'js/session_follow.js' %}"></script>
 <script src ="{% static 'js/ajax_search.js' %}"> </script>
+
 </body>
 </html>
