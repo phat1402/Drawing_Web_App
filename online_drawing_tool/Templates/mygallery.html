@@ -122,20 +122,20 @@
                     <ul id="search_results"></ul>
                 </div>
                 <div class="profile_info">
-                    <ul>
-                        <li>
-                            <img src="{% static 'img/post.png' %}" class="profile-icon">
-                            <h3 style="display: inline-block"> {{ numberofphoto }} Posts </h3>
-                        </li>
-                        <li>
-                            <img src="{% static 'img/follower.png' %}" class="profile-icon">
-                            <h3 style="display: inline-block"> 100 Followers </h3>
-                        </li>
-                        <li>
-                            <img src="{% static 'img/following.png' %}" class="profile-icon">
-                            <h3 style="display: inline-block"> 102 Following </h3>
-                        </li>
-                    </ul>
+                            <ul>
+                                <li>
+                                    <img src="{% static 'img/post.png' %}" class="profile-icon">
+                                    <h3 style="display: inline-block"> {{ numberofphoto }} Posts </h3>
+                                </li>
+                                <li>
+                                    <img src="{% static 'img/follower.png' %}" class="profile-icon">
+                                    <h3 id="follower-count" style="display: inline-block"></h3>
+                                </li>
+                                <li>
+                                    <img src="{% static 'img/following.png' %}" class="profile-icon">
+                                    <h3 id="following-count" style="display: inline-block"></h3>
+                                </li>
+                            </ul>
                 </div>
                 <button class="btn-default btn" type="button" style="margin-top: 10px">
                     Edit Profile
@@ -257,7 +257,8 @@
 
 
 </script>
-<script src="{% static 'js/ajax_search.js' %}"></script>
-
+<script src ="{% static 'js/ajax_search.js' %}"></script>
+<script src ="{% static 'js/session_follow.js' %}"></script>
+<script src ="{% static 'js/ajax_search.js' %}"> </script>
 </body>
 </html>

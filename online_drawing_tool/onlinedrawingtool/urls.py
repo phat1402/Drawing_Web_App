@@ -23,14 +23,21 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.HomePage.as_view(), name='HomePage'),
+    url(r'^landing$', views.HomePage.as_view(), name='LandingPage'),
     url(r'^mygallery', views.MyGallery.as_view(), name='MyGallery'),
     url(r'^image_detail(?P<photo_id>[\w-]+)$', views.ImageDetail.as_view(), name='ImageDetail'),
+    url(r'^stranger_detail(?P<photo_id>[\w-]+)$', views.ImageDetailStranger.as_view(), name='ImageDetailStranger'),
     url(r'^gallery_item(?P<photo_id>[\w-]+)$', views.GalleryImageDetail.as_view(), name='GalleryImageDetail'),
     url(r'^edit_image(?P<photo_id>[\w-]+)$', views.EditImage.as_view(), name='EditImage'),
+    url(r'^friend_gallery(?P<username>[\w-]+)$', views.FriendGallery.as_view(), name='FriendGallery'),
+    url(r'^stranger_gallery(?P<username>[\w-]+)$', views.StrangerGallery.as_view(), name='StrangerGallery'),
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^friend_image_detail', views.FriendImageDetail.as_view(), name='FriendImageDetail'),
     url(r'^upload', views.upload_image, name="upload_image"),
     url(r'^api/', include(api.urls, namespace='api')),
+    url(r'^usergallery',views.UserGallery.as_view(),name='UserGallery'),
+    url(r'^pagenotfound',views.PageNotFound.as_view(),name='PageNotFound')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 

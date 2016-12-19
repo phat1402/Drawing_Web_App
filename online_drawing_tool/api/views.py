@@ -2,9 +2,12 @@ from django.views import generic
 from braces.views import LoginRequiredMixin, JsonRequestResponseMixin, \
     CsrfExemptMixin, AjaxResponseMixin, JSONResponseMixin
 from django.apps import apps
-from api.models import UserInfor,Photo,UserGallery,Photolike, Comment
+from api.models import UserInfor,Photo,UserGallery,Photolike,Following,Followed,Comment
 from django.http import HttpResponse
 import json as simplejson
+from django.shortcuts import render_to_response
+from api.models import UserInfor
+from django.http import HttpResponse,HttpResponseRedirect
 import json
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
@@ -21,7 +24,7 @@ from django.core.exceptions import ValidationError
 from django.contrib import messages
 from django.template import loader
 from django.db.models.query_utils import Q
-
+from django.core.urlresolvers import reverse
 
 class ResetPasswordRequestView(generic.View):
     @staticmethod
@@ -175,7 +178,6 @@ class SendRegisterAPI(CsrfExemptMixin, JsonRequestResponseMixin, generic.View):
             username_obj = UserInfor.objects.get(username=username)
             UserGallery.objects.create(gallery_id=gallery_id, username=username_obj)
             data = {'result': 'success', 'message_3': 'Successfully create new account.'}
-
         return HttpResponse(json.dumps(data))
 
     # def autocomplete_search(request):
@@ -210,6 +212,19 @@ def search_titles(request):
     else:
         results_Photo = ''
     return render_to_response('ajax_search.html', {'results': results_Photo, 'select': select})
+
+
+def search_user(request):
+    select = 'user'
+    if request.method == 'GET':
+        search_text = request.GET.get('user_search_text')
+    else:
+        search_text = ''
+    if (search_text != ''):
+        results_User = UserInfor.objects.filter(username__istartswith= search_text)
+    else:
+        results_User =''
+    return render_to_response('ajax_search.html',{'results': results_User,'select': select})
 
 
 def log_out(request):
@@ -321,7 +336,6 @@ def like_ajax(request):
             data = {'likes': likes, 'liked': liked}
             return HttpResponse(json.dumps(data))
 
-
 def saveimage(request):
     name = request.POST.get('image_name')
     data_base64 = request.POST.get('data_base64')
@@ -367,8 +381,78 @@ def save_edited_image(request):
     # Add Infor to database
     photo_link = '/static/user_photo/' + image_name
     Photo.objects.filter(photo_id=photo_id).update(photo_link=photo_link)
-
     return HttpResponse(message)
+
+def followstatus(request):
+    user = request.session.get('username',False)
+
+    if (request.method == 'GET'):
+        name = request.GET.get('u','')
+        print (user, '  ',name)
+        valid = UserInfor.objects.filter(username__exact = name).exists()
+        if (not user ):
+            return render_to_response('isFollowed.html', {'stat': 3})
+        if ( not valid ):
+            return render_to_response('isFollowed.html', {'stat': 404})
+        if (user == name):
+            #return render(request,'mygallery.html')
+            #return HttpResponseRedirect(reverse('mygallery.html'))
+            return render_to_response('isFollowed.html', {'stat': 2})
+        else :
+            #query = '''Select username from following where username = %s and follower = %s '''
+            # , [name, user]
+            isFollowed = Following.objects.filter(username__exact = name,follower__exact = user).count()
+            #print (querySet.query)
+            if (isFollowed > 0):
+                return render_to_response('isFollowed.html', {'stat': 1})
+            else : return render_to_response('isFollowed.html', {'stat': 0})
+
+
+def follow(request):
+    user = request.session.get('username',False)
+    name = request.GET.get('u')
+    if(not user):
+        return render(request,"index.html")
+    else:
+        val=request.GET.get('val')
+        print (val)
+        if (val == 'Unfollow'):
+            print('Begin to unfollow')
+            #sth here
+            pinstance = Following.objects.get(username=name, follower=user)
+            pinstance.delete()
+            zinstance = Followed.objects.get(username=user, followed= name)
+            zinstance.delete()
+            return render_to_response('isFollowed.html',{'stat':1,'case':'Follow','user':name})
+        if (val == 'Follow'):
+            print('Begin to Follow')
+            tempWing = UserInfor.objects.get(username= name)
+            tempEd = UserInfor.objects.get(username=user)
+            p = Following(  username = tempWing, follower=tempEd)
+            p.save()
+            # tempEd= UserInfor(username=user)
+            z = Followed (username = tempEd, followed= tempWing)
+            z.save()
+            #sth here
+            return render_to_response('isFollowed.html',{'stat':0,'case':'Unfollow','user':name})
+
+def getFollower(request):
+    name = request.GET.get('u', '')
+    num = Following.objects.filter(username__exact=name).count()
+    return render_to_response('followerNum.html',{'num': num})
+
+def getFollowing(request):
+    name = request.GET.get('u', '')
+    num = Following.objects.filter(follower__exact=name).count()
+    return render_to_response('followingNum.html',{'num': num})
+
+def sessFollower(request):
+    num = Following.objects.filter(username__exact=request.session['username']).count()
+    return render_to_response('followerNum.html',{'num': num})
+
+def sessFollowing(request):
+    num = Following.objects.filter(follower__exact=request.session['username']).count()
+    return render_to_response('followingNum.html',{'num': num})
 
 def comment(request):
     comment_db = request.GET.get('comment_text')
