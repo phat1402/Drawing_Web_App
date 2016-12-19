@@ -151,3 +151,13 @@ class FriendImageDetail(generic.TemplateView):
 
     def get(self, request, *args, **kwargs):
         return super(FriendImageDetail, self).get(request, *args, **kwargs)
+
+class UserGallery(generic.TemplateView):
+    template_name = 'usergallery.html'
+    def get(self, request, *args, **kwargs):
+        return super(UserGallery, self).get(request, *args, **kwargs)
+
+class PageNotFound(generic.TemplateView):
+    template_name = '404.html'
+    def get(self, request, *args, **kwargs):
+        return super(PageNotFound, self).get(request, *args, **kwargs)

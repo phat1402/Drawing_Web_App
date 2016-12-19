@@ -114,11 +114,11 @@
                                 </li>
                                 <li>
                                     <img src="{% static 'img/follower.png' %}" class="profile-icon">
-                                    <h3 style="display: inline-block"> 100 Followers </h3>
+                                    <h3 id="follower-count" style="display: inline-block"></h3>
                                 </li>
                                 <li>
                                     <img src="{% static 'img/following.png' %}" class="profile-icon">
-                                    <h3 style="display: inline-block"> 102 Following </h3>
+                                    <h3 id="following-count" style="display: inline-block"></h3>
                                 </li>
                             </ul>
                         </div>
@@ -214,7 +214,8 @@
 
 
 </script>
+<script src ="{% static 'js/ajax_search.js' %}"></script>
+<script src ="{% static 'js/session_follow.js' %}"></script>
 <script src ="{% static 'js/ajax_search.js' %}"> </script>
-
 </body>
 </html>
