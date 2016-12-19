@@ -98,8 +98,25 @@
 
 </div>
         <div class = "container image_container ma-top-30">
+            <h1 style="color:white">Friends</h1>
             <div id="gallery">
                 {% for photo in photo_list %}
+                    <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
+                      <a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} ">
+                      <img src="{{ photo.photo_link }}" height="250px" width="285px" />
+                        <figcaption>
+                            <h2>{{ photo.username.username }}</h2>
+                            <p>{{ photo.photo_name }}</p>
+                        </figcaption>
+                        </a>
+                    </figure>
+                {% endfor %}
+            </div>
+        </div>
+        <div class = "container image_container ma-top-30">
+            <h1 style="color:white">Explore</h1>
+            <div id="gallery">
+                {% for photo in photo_list_explore %}
                     <figure class="col-md-3 col-sm-3 col-xs-12 padding-none ">
                       <a title="Image 1" href="{% url 'ImageDetail' photo.photo_id %} ">
                       <img src="{{ photo.photo_link }}" height="250px" width="285px" />
