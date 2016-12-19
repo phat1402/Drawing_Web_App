@@ -17,6 +17,8 @@ from django.conf.urls import include, url
 from django.contrib import admin
 import api.urls
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,6 +30,7 @@ urlpatterns = [
     url(r'^coloringpage', views.ColoringPage.as_view(), name='ColoringPage'),
     url(r'^newsfeed', views.NewsFeed.as_view(), name='NewsFeed'),
     url(r'^friend_image_detail', views.FriendImageDetail.as_view(), name='FriendImageDetail'),
+    url(r'^upload', views.upload_image, name="upload_image"),
     url(r'^api/', include(api.urls, namespace='api')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

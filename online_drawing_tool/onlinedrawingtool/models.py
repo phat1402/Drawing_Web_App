@@ -191,7 +191,8 @@ class UserInfor(models.Model):
     avatar_link = models.CharField(max_length=255, blank=True, null=True)
     report_num = models.IntegerField(blank=True, null=True)
     isadmin = models.IntegerField(blank=True, null=True)
+    docfile = models.FileField(upload_to='documents', null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'user_infor'
