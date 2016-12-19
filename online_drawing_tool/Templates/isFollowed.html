@@ -16,7 +16,7 @@
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
         $('#follow_btn').click(function () {
-            var u = getParameterByName('u');
+            var u = '{{ user }}';
             var val = $(this).val();
             $.ajax({
            type: 'GET',

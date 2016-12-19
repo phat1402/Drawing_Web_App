@@ -410,7 +410,7 @@ def followstatus(request):
 
 def follow(request):
     user = request.session.get('username',False)
-    name = request.GET.get('u','')
+    name = request.GET.get('u')
     if(not user):
         return render(request,"index.html")
     else:
@@ -423,17 +423,18 @@ def follow(request):
             pinstance.delete()
             zinstance = Followed.objects.get(username=user, followed= name)
             zinstance.delete()
-            return render_to_response('isFollowed.html',{'stat':1,'case':'Follow'})
+            return render_to_response('isFollowed.html',{'stat':1,'case':'Follow','user':name})
         if (val == 'Follow'):
             print('Begin to Follow')
-            tempWing = UserInfor(username= name)
-            p = Following(  username = tempWing, follower=user)
+            tempWing = UserInfor.objects.get(username= name)
+            tempEd = UserInfor.objects.get(username=user)
+            p = Following(  username = tempWing, follower=tempEd)
             p.save()
-            tempEd= UserInfor(username=user)
-            z = Followed (username = tempEd, followed= name)
+            # tempEd= UserInfor(username=user)
+            z = Followed (username = tempEd, followed= tempWing)
             z.save()
             #sth here
-            return render_to_response('isFollowed.html',{'stat':0,'case':'Unfollow'})
+            return render_to_response('isFollowed.html',{'stat':0,'case':'Unfollow','user':name})
 
 def getFollower(request):
     name = request.GET.get('u', '')

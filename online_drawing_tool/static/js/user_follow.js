@@ -17,7 +17,7 @@ function getParameterByName(name, url) {
 }
 $(document).ready(function() {
     var loaded =false;
-    var u = getParameterByName('u');
+    var u = {{username}};
     if(loaded) return;
        $.ajax({
            type: 'GET',
@@ -37,7 +37,7 @@ $(document).ready(function() {
 }) ;
 
 var getfollower= (function(){
-    var u = getParameterByName('u');
+    var u = {{username}};
     $.ajax({
            type: 'GET',
            url : 'api/getfollower',
@@ -54,7 +54,7 @@ var getfollower= (function(){
 });
 
 var getfollowing=(function(){
-    var u = getParameterByName('u');
+    var u = {{username}};
     $.ajax({
            type: 'GET',
            url : 'api/getfollowing',
