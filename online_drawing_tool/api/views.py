@@ -391,25 +391,25 @@ def followstatus(request):
         print (user, '  ',name)
         valid = UserInfor.objects.filter(username__exact = name).exists()
         if (not user ):
-            return render_to_response('isFollowed.html', {'stat': 3})
+            return render_to_response('isFollowed.html', {'stat': 3,'user':name})
         if ( not valid ):
-            return render_to_response('isFollowed.html', {'stat': 404})
+            return render_to_response('isFollowed.html', {'stat': 404,'user':name})
         if (user == name):
             #return render(request,'mygallery.html')
             #return HttpResponseRedirect(reverse('mygallery.html'))
-            return render_to_response('isFollowed.html', {'stat': 2})
+            return render_to_response('isFollowed.html', {'stat': 2,'user':name})
         else :
             #query = '''Select username from following where username = %s and follower = %s '''
             # , [name, user]
             isFollowed = Following.objects.filter(username__exact = name,follower__exact = user).count()
             #print (querySet.query)
             if (isFollowed > 0):
-                return render_to_response('isFollowed.html', {'stat': 1})
-            else : return render_to_response('isFollowed.html', {'stat': 0})
+                return render_to_response('isFollowed.html', {'stat': 1,'user':name})
+            else : return render_to_response('isFollowed.html', {'stat': 0,'user':name})
 
 
 def follow(request):
-    user = request.session.get('username',False)
+    user = request.session.get('username', False)
     name = request.GET.get('u')
     if(not user):
         return render(request,"index.html")
@@ -426,12 +426,12 @@ def follow(request):
             return render_to_response('isFollowed.html',{'stat':1,'case':'Follow','user':name})
         if (val == 'Follow'):
             print('Begin to Follow')
-            tempWing = UserInfor.objects.get(username= name)
-            tempEd = UserInfor.objects.get(username=user)
-            p = Following(  username = tempWing, follower=tempEd)
+            tempWing = UserInfor(username= name)
+            tempEd = UserInfor(username=user)
+            p = Following(  username = tempWing, follower=tempEd.username)
             p.save()
             # tempEd= UserInfor(username=user)
-            z = Followed (username = tempEd, followed= tempWing)
+            z = Followed (username = tempEd, followed= tempWing.username)
             z.save()
             #sth here
             return render_to_response('isFollowed.html',{'stat':0,'case':'Unfollow','user':name})
